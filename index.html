@@ -234,6 +234,64 @@
     ::-webkit-scrollbar-thumb { background: #D4A880; border-radius: 3px; }
     ::-webkit-scrollbar-thumb:hover { background: #C8A44A; }
 
+    /* ━━ RESPONSIVE ━━ */
+
+    /* Tablet ≤ 1024px */
+    @media (max-width: 1024px) {
+      #about-grid {
+        grid-template-columns: 1fr !important;
+        gap: 48px !important;
+      }
+      #about-grid > .reveal:last-child {
+        justify-content: flex-start !important;
+      }
+    }
+
+    /* Mobile + Tablet ≤ 767px */
+    @media (max-width: 767px) {
+      #about    { padding: 64px 0 !important; }
+      #services { padding: 64px 0 !important; }
+      #projects { padding: 64px 0 !important; }
+      #contact  { padding: 64px 0 !important; }
+
+      #hero-content { padding: 48px 20px 64px !important; }
+
+      .service-card { padding: 24px !important; }
+
+      #projects .project-card > div + div { padding: 24px !important; }
+
+      footer > div {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+      }
+
+      /* Buttons stretch on small screens */
+      #hero-btns { flex-direction: column !important; }
+      #hero-btns .btn-gold,
+      #hero-btns .btn-ghost { width: 100% !important; justify-content: center !important; }
+
+      /* Contact CTA button */
+      #contact .btn-gold { width: 100% !important; justify-content: center !important; max-width: 360px; }
+
+      /* Stats numbers shrink */
+      .stat-val { font-size: 40px !important; }
+
+      /* About card full width */
+      #about-grid > .reveal:last-child > div { max-width: 100% !important; }
+
+      /* Reduce about section gap text */
+      #about-grid > .reveal:first-child h2 { font-size: clamp(30px,7vw,44px) !important; }
+      #about-grid > .reveal:first-child p  { font-size: 15px !important; }
+    }
+
+    /* Small mobile ≤ 480px */
+    @media (max-width: 480px) {
+      #about-grid { gap: 32px !important; }
+      #hero-content { padding: 36px 16px 56px !important; }
+      footer > div { padding: 20px 16px !important; }
+    }
+
     /* ── Icon badge ── */
     .icon-badge {
       width: 54px; height: 54px;
@@ -305,8 +363,8 @@
 
     <!-- Logo -->
     <a href="#" style="display: flex; align-items: center; gap: 14px; text-decoration: none;" aria-label="NC Developer LLC — home">
-      <div style="width: 42px; height: 42px; flex-shrink: 0; transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);" onmouseover="this.style.transform='scale(1.12) rotate(-4deg)'" onmouseout="this.style.transform='scale(1) rotate(0deg)'">
-        <img src="brand_assets/%20NC-Devs%20logo.png" alt="NC Developer logo mark" style="width:100%;height:100%;object-fit:contain;" onerror="this.style.display='none'" />
+      <div style="width: 46px; height: 46px; flex-shrink: 0; transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);" onmouseover="this.style.transform='scale(1.12) rotate(-4deg)'" onmouseout="this.style.transform='scale(1) rotate(0deg)'">
+        <img src="%20NC-Devs%20logo.png" alt="NC Developer logo mark" style="width:100%;height:100%;object-fit:contain;" onerror="this.src='brand_assets/%20NC-Devs%20logo.png'" />
       </div>
       <div style="line-height: 1.1;">
         <span class="shimmer-gold" style="display:block; font-family:'Cinzel Decorative','Playfair Display',serif; font-size:17px; font-weight:700;">NC – Developer</span>
@@ -340,6 +398,10 @@
 
   <!-- Mobile menu -->
   <div id="mobile-nav" style="display:none; flex-direction:column; gap:2px; padding:16px 28px 24px; border-top:1px solid rgba(200,164,74,0.18); background:rgba(253,243,236,0.98);">
+    <div style="display:flex;align-items:center;gap:12px;padding:8px 0 16px;border-bottom:1px solid rgba(200,164,74,0.15);margin-bottom:8px;">
+      <img src="%20NC-Devs%20logo.png" alt="NC Developer" style="width:36px;height:36px;object-fit:contain;" onerror="this.src='brand_assets/%20NC-Devs%20logo.png'" />
+      <span class="shimmer-gold" style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;">NC – Developer, LLC</span>
+    </div>
     <a href="#about"    onclick="closeNav()" class="nav-link" style="padding:12px 0; display:block;">About</a>
     <a href="#services" onclick="closeNav()" class="nav-link" style="padding:12px 0; display:block;">Services</a>
     <a href="#projects" onclick="closeNav()" class="nav-link" style="padding:12px 0; display:block;">Projects</a>
@@ -373,7 +435,7 @@
   <div style="position:absolute;top:50%;right:3%;transform:translateY(-50%);width:560px;height:560px;background:radial-gradient(ellipse,rgba(200,164,74,0.10),transparent 70%);border-radius:50%;filter:blur(40px);pointer-events:none;" class="hidden lg:block"></div>
 
   <!-- Content -->
-  <div style="max-width:1280px;margin:0 auto;padding:80px 28px;width:100%;">
+  <div id="hero-content" style="max-width:1280px;margin:0 auto;padding:80px 28px;width:100%;">
     <div style="max-width:680px;">
       <div class="section-tag" style="margin-bottom:28px;animation:fadeUp 0.6s 0.1s both;">
         Mobile &amp; Web Development Studio
@@ -404,7 +466,7 @@
         We transform bold ideas into powerful mobile and web applications. From concept to launch — design, development, and everything between.
       </p>
 
-      <div style="display:flex;flex-wrap:wrap;gap:16px;animation:fadeUp 0.7s 0.35s both;">
+      <div id="hero-btns" style="display:flex;flex-wrap:wrap;gap:16px;animation:fadeUp 0.7s 0.35s both;">
         <a href="https://calendar.google.com" target="_blank" rel="noopener noreferrer" class="btn-gold" style="padding:14px 32px;font-size:15px;">
           Start Your Project
           <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 7.5h11M8.5 3l4.5 4.5L8.5 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -430,17 +492,17 @@
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;">
 
       <div class="reveal" style="text-align:center;padding:44px 24px;">
-        <div style="font-family:'Playfair Display',serif;font-size:56px;font-weight:900;line-height:1;background:linear-gradient(135deg,#C8A44A,#E8C96A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">98%</div>
+        <div class="stat-val" style="font-family:'Playfair Display',serif;font-size:56px;font-weight:900;line-height:1;background:linear-gradient(135deg,#C8A44A,#E8C96A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">98%</div>
         <div style="font-size:13px;color:#A07858;margin-top:10px;letter-spacing:0.06em;text-transform:uppercase;">Client Satisfaction</div>
       </div>
 
       <div class="reveal stat-divider" style="text-align:center;padding:44px 24px;">
-        <div style="font-family:'Playfair Display',serif;font-size:56px;font-weight:900;line-height:1;background:linear-gradient(135deg,#1EBFA0,#4EDBC5);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">150+</div>
+        <div class="stat-val" style="font-family:'Playfair Display',serif;font-size:56px;font-weight:900;line-height:1;background:linear-gradient(135deg,#1EBFA0,#4EDBC5);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">150+</div>
         <div style="font-size:13px;color:#A07858;margin-top:10px;letter-spacing:0.06em;text-transform:uppercase;">Projects Delivered</div>
       </div>
 
       <div class="reveal stat-divider" style="text-align:center;padding:44px 24px;">
-        <div style="font-family:'Playfair Display',serif;font-size:56px;font-weight:900;line-height:1;background:linear-gradient(135deg,#B5D429,#D4F04A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">5+</div>
+        <div class="stat-val" style="font-family:'Playfair Display',serif;font-size:56px;font-weight:900;line-height:1;background:linear-gradient(135deg,#B5D429,#D4F04A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">5+</div>
         <div style="font-size:13px;color:#A07858;margin-top:10px;letter-spacing:0.06em;text-transform:uppercase;">Years Experience</div>
       </div>
 
@@ -456,7 +518,7 @@
   <div style="position:absolute;bottom:-80px;left:-80px;width:360px;height:360px;background:radial-gradient(ellipse,rgba(200,164,74,0.04),transparent 70%);border-radius:50%;pointer-events:none;"></div>
 
   <div style="max-width:1280px;margin:0 auto;padding:0 28px;">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;" class="md:grid-cols-2 grid-cols-1">
+    <div id="about-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
 
       <!-- Text -->
       <div class="reveal">
