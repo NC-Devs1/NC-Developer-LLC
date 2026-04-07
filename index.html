@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NC – Developer, LLC | Mobile & Web Application Studio</title>
+  <meta name="description" content="NC – Developer, LLC is a boutique mobile and web application development studio based in Rosedale, Maryland. We transform bold ideas into powerful digital experiences." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Dancing+Script:wght@600;700&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold:        '#C8A44A',
+            'gold-lt':   '#E8C96A',
+            'gold-dk':   '#9A7A2E',
+            teal:        '#1EBFA0',
+            'teal-dk':   '#0F8F76',
+            lime:        '#B5D429',
+            dark:        '#0B1710',
+            surface:     '#162218',
+            card:        '#1E3028',
+            cream:       '#F0EAD6',
+            muted:       '#7A9488',
+            sage:        '#B0C4B8',
+          },
+          fontFamily: {
+            display: ['"Playfair Display"', 'Georgia', 'serif'],
+            body:    ['"DM Sans"', 'system-ui', 'sans-serif'],
+            script:  ['"Dancing Script"', 'cursive'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: #FDF3EC;
+      color: #2C1A0E;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Grain texture ── */
+    .grain { position: relative; }
+    .grain::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      background-size: 300px 300px;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .grain > * { position: relative; z-index: 2; }
+
+    /* ── Nav link underline ── */
+    .nav-link {
+      position: relative;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-decoration: none;
+      font-family: 'Playfair Display', serif;
+      background: linear-gradient(
+        105deg,
+        #7A5C1E 0%,
+        #B8892A 30%,
+        #E8C060 50%,
+        #B8892A 70%,
+        #7A5C1E 100%
+      );
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: goldShimmer 5s linear infinite;
+      transition: background-position 0.4s;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 1.5px;
+      background: linear-gradient(90deg, #9A7A2E, #E8C060, #9A7A2E);
+      transition: width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .nav-link:hover::after { width: 100%; }
+    .nav-link:focus-visible { outline: 2px solid #C8A44A; outline-offset: 4px; border-radius: 2px; }
+
+    /* ── Buttons ── */
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      background: linear-gradient(135deg, #C8A44A 0%, #E8C96A 50%, #C8A44A 100%);
+      background-size: 200% auto;
+      color: #0B1710;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: 8px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background-position 0.4s cubic-bezier(0.34,1.56,0.64,1),
+                  transform 0.2s cubic-bezier(0.34,1.56,0.64,1),
+                  box-shadow 0.3s;
+      box-shadow: 0 4px 20px rgba(200,164,74,0.32), 0 1px 4px rgba(0,0,0,0.4);
+    }
+    .btn-gold:hover {
+      background-position: right center;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(200,164,74,0.45), 0 2px 8px rgba(0,0,0,0.5);
+    }
+    .btn-gold:active { transform: translateY(0); }
+    .btn-gold:focus-visible { outline: 2px solid #C8A44A; outline-offset: 3px; }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 28px;
+      border: 1.5px solid rgba(200,164,74,0.4);
+      color: #C8A44A;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: border-color 0.25s, background 0.25s, transform 0.2s;
+    }
+    .btn-ghost:hover {
+      border-color: #C8A44A;
+      background: rgba(200,164,74,0.08);
+      transform: translateY(-1px);
+    }
+    .btn-ghost:active { transform: translateY(0); }
+    .btn-ghost:focus-visible { outline: 2px solid #C8A44A; outline-offset: 3px; }
+
+    /* ── Section tag ── */
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #1EBFA0;
+    }
+    .section-tag::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1.5px;
+      background: #1EBFA0;
+      flex-shrink: 0;
+    }
+
+    /* ── Cards ── */
+    .service-card {
+      background: linear-gradient(145deg, #FFFFFF 0%, #FEF6F0 100%);
+      border: 1px solid rgba(200,164,74,0.18);
+      border-radius: 18px;
+      padding: 36px;
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1),
+                  box-shadow 0.35s,
+                  border-color 0.3s;
+    }
+    .service-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(200,164,74,0.4);
+      box-shadow: 0 24px 64px rgba(200,120,60,0.15),
+                  0 0 0 1px rgba(200,164,74,0.12),
+                  inset 0 1px 0 rgba(200,164,74,0.1);
+    }
+    .service-card.teal-card:hover { border-color: rgba(30,191,160,0.35); }
+    .service-card.lime-card:hover { border-color: rgba(181,212,41,0.3); }
+
+    .project-card {
+      background: linear-gradient(145deg, #FFFFFF 0%, #FEF6F0 100%);
+      border: 1px solid rgba(200,164,74,0.18);
+      border-radius: 18px;
+      overflow: hidden;
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1),
+                  box-shadow 0.35s,
+                  border-color 0.3s;
+    }
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 64px rgba(200,120,60,0.15);
+    }
+    .project-card.gold-proj:hover { border-color: rgba(200,164,74,0.4); }
+    .project-card.teal-proj:hover {
+      border-color: rgba(30,191,160,0.4);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.55), 0 0 40px rgba(30,191,160,0.08);
+    }
+    .project-card.lime-proj:hover { border-color: rgba(181,212,41,0.35); }
+
+    /* ── Float animation ── */
+    @keyframes floatGeo {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      33%       { transform: translateY(-14px) rotate(2deg); }
+      66%       { transform: translateY(-6px) rotate(-1deg); }
+    }
+    .float-geo { animation: floatGeo 7s ease-in-out infinite; }
+    .float-geo-r { animation: floatGeo 9s ease-in-out infinite reverse; }
+
+    /* ── Scroll reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s cubic-bezier(0.34,1.1,0.64,1),
+                  transform 0.65s cubic-bezier(0.34,1.1,0.64,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Stat dividers ── */
+    @media (min-width: 768px) {
+      .stat-divider { border-left: 1px solid rgba(200,164,74,0.12); }
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #FDF3EC; }
+    ::-webkit-scrollbar-thumb { background: #D4A880; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #C8A44A; }
+
+    /* ── Icon badge ── */
+    .icon-badge {
+      width: 54px; height: 54px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 28px;
+      flex-shrink: 0;
+    }
+
+    /* ── Tag pill ── */
+    .pill {
+      font-size: 11px; font-weight: 500;
+      padding: 4px 14px;
+      border-radius: 100px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Shimmery dark gold text ── */
+    @keyframes goldShimmer {
+      0%   { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    .shimmer-gold {
+      background: linear-gradient(
+        105deg,
+        #7A5C1E 0%,
+        #9A7A2E 20%,
+        #C8A44A 35%,
+        #F0D070 50%,
+        #C8A44A 65%,
+        #9A7A2E 80%,
+        #7A5C1E 100%
+      );
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: goldShimmer 4s linear infinite;
+    }
+    .shimmer-gold-nav {
+      background: linear-gradient(
+        105deg,
+        #7A5C1E 0%,
+        #B8892A 30%,
+        #E8C060 50%,
+        #B8892A 70%,
+        #7A5C1E 100%
+      );
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: goldShimmer 5s linear infinite;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ━━━━━━━━━━━━━━━━━━ NAVIGATION ━━━━━━━━━━━━━━━━━━ -->
+<nav id="navbar" style="
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(253, 243, 236, 0.92);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border-bottom: 1px solid rgba(200,164,74,0.18);
+  transition: background 0.3s, box-shadow 0.3s;
+">
+  <div style="max-width: 1280px; margin: 0 auto; padding: 0 28px; height: 72px; display: flex; align-items: center; justify-content: space-between;">
+
+    <!-- Logo -->
+    <a href="#" style="display: flex; align-items: center; gap: 14px; text-decoration: none;" aria-label="NC Developer LLC — home">
+      <div style="width: 42px; height: 42px; flex-shrink: 0; transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);" onmouseover="this.style.transform='scale(1.12) rotate(-4deg)'" onmouseout="this.style.transform='scale(1) rotate(0deg)'">
+        <img src="brand_assets/%20NC-Devs%20logo.png" alt="NC Developer logo mark" style="width:100%;height:100%;object-fit:contain;" onerror="this.style.display='none'" />
+      </div>
+      <div style="line-height: 1.1;">
+        <span class="shimmer-gold" style="display:block; font-family:'Cinzel Decorative','Playfair Display',serif; font-size:17px; font-weight:700;">NC – Developer</span>
+        <span class="shimmer-gold" style="display:block; font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; margin-top:1px;">LLC</span>
+      </div>
+    </a>
+
+    <!-- Desktop links -->
+    <div style="display:flex; align-items:center; gap:36px;" class="hidden md:flex">
+      <a href="#about"    class="nav-link">About</a>
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#contact"  class="nav-link">Contact</a>
+    </div>
+
+    <!-- Desktop CTA -->
+    <a href="https://calendar.google.com" target="_blank" rel="noopener noreferrer" class="btn-gold hidden md:inline-flex" style="padding:10px 22px;font-size:13px;">
+      Book a Call
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1.5 6.5h10M7 2l4.5 4.5L7 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <!-- Mobile hamburger -->
+    <button id="hamburger" onclick="toggleNav()" aria-label="Toggle navigation menu" style="
+      display:none; flex-direction:column; gap:5px; padding:8px; background:none; border:none; cursor:pointer; color:#2C1A0E;
+    " class="md:hidden !flex">
+      <span style="display:block;width:22px;height:1.5px;background:currentColor;transition:transform 0.25s,opacity 0.25s;" id="hb1"></span>
+      <span style="display:block;width:22px;height:1.5px;background:currentColor;transition:opacity 0.25s;" id="hb2"></span>
+      <span style="display:block;width:22px;height:1.5px;background:currentColor;transition:transform 0.25s;" id="hb3"></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-nav" style="display:none; flex-direction:column; gap:2px; padding:16px 28px 24px; border-top:1px solid rgba(200,164,74,0.18); background:rgba(253,243,236,0.98);">
+    <a href="#about"    onclick="closeNav()" class="nav-link" style="padding:12px 0; display:block;">About</a>
+    <a href="#services" onclick="closeNav()" class="nav-link" style="padding:12px 0; display:block;">Services</a>
+    <a href="#projects" onclick="closeNav()" class="nav-link" style="padding:12px 0; display:block;">Projects</a>
+    <a href="#contact"  onclick="closeNav()" class="nav-link" style="padding:12px 0; display:block;">Contact</a>
+    <a href="https://calendar.google.com" target="_blank" rel="noopener" class="btn-gold" style="margin-top:12px;justify-content:center;">Book a Call</a>
+  </div>
+</nav>
+
+
+<!-- ━━━━━━━━━━━━━━━━━━ HERO ━━━━━━━━━━━━━━━━━━ -->
+<section class="grain" style="
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 72px;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 80% 65% at 15% 60%, rgba(200,164,74,0.18) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 75% at 82% 25%, rgba(30,191,160,0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 45% 55% at 55% 95%, rgba(181,212,41,0.07) 0%, transparent 55%),
+    #FDF3EC;
+">
+
+  <!-- Spiral Animation -->
+  <div style="position:absolute;top:50%;right:3%;transform:translateY(-50%);width:520px;height:520px;border-radius:50%;overflow:hidden;pointer-events:none;box-shadow:0 0 80px rgba(200,164,74,0.18),0 0 0 1px rgba(200,164,74,0.12);" class="hidden lg:block">
+    <canvas id="spiral-canvas" style="display:block;"></canvas>
+  </div>
+
+  <!-- Ambient glow behind spiral -->
+  <div style="position:absolute;top:50%;right:3%;transform:translateY(-50%);width:560px;height:560px;background:radial-gradient(ellipse,rgba(200,164,74,0.10),transparent 70%);border-radius:50%;filter:blur(40px);pointer-events:none;" class="hidden lg:block"></div>
+
+  <!-- Content -->
+  <div style="max-width:1280px;margin:0 auto;padding:80px 28px;width:100%;">
+    <div style="max-width:680px;">
+      <div class="section-tag" style="margin-bottom:28px;animation:fadeUp 0.6s 0.1s both;">
+        Mobile &amp; Web Development Studio
+      </div>
+
+      <h1 style="
+        font-family:'Playfair Display',serif;
+        font-size: clamp(50px, 7.5vw, 92px);
+        font-weight: 900;
+        line-height: 1.04;
+        letter-spacing: -0.03em;
+        color: #2C1A0E;
+        margin-bottom: 28px;
+        animation: fadeUp 0.7s 0.15s both;
+      ">
+        Build Your<br />
+        <span class="shimmy-gold-green">Dream App.</span>
+      </h1>
+
+      <p style="
+        font-size: 18px;
+        line-height: 1.78;
+        color: #8B6040;
+        max-width: 520px;
+        margin-bottom: 44px;
+        animation: fadeUp 0.7s 0.25s both;
+      ">
+        We transform bold ideas into powerful mobile and web applications. From concept to launch — design, development, and everything between.
+      </p>
+
+      <div style="display:flex;flex-wrap:wrap;gap:16px;animation:fadeUp 0.7s 0.35s both;">
+        <a href="https://calendar.google.com" target="_blank" rel="noopener noreferrer" class="btn-gold" style="padding:14px 32px;font-size:15px;">
+          Start Your Project
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 7.5h11M8.5 3l4.5 4.5L8.5 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#services" class="btn-ghost" style="padding:14px 32px;font-size:15px;">
+          Our Services
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll hint -->
+  <div style="position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0.35;pointer-events:none;">
+    <span style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#B08060;">Scroll</span>
+    <div style="width:1px;height:36px;background:linear-gradient(to bottom,#C8A44A,transparent);"></div>
+  </div>
+</section>
+
+
+<!-- ━━━━━━━━━━━━━━━━━━ STATS BAR ━━━━━━━━━━━━━━━━━━ -->
+<section style="background:#F5E8DC;border-top:1px solid rgba(200,164,74,0.2);border-bottom:1px solid rgba(200,164,74,0.2);">
+  <div style="max-width:1280px;margin:0 auto;padding:0 28px;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;">
+
+      <div class="reveal" style="text-align:center;padding:44px 24px;">
+        <div style="font-family:'Playfair Display',serif;font-size:56px;font-weight:900;line-height:1;background:linear-gradient(135deg,#C8A44A,#E8C96A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">98%</div>
+        <div style="font-size:13px;color:#A07858;margin-top:10px;letter-spacing:0.06em;text-transform:uppercase;">Client Satisfaction</div>
+      </div>
+
+      <div class="reveal stat-divider" style="text-align:center;padding:44px 24px;">
+        <div style="font-family:'Playfair Display',serif;font-size:56px;font-weight:900;line-height:1;background:linear-gradient(135deg,#1EBFA0,#4EDBC5);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">150+</div>
+        <div style="font-size:13px;color:#A07858;margin-top:10px;letter-spacing:0.06em;text-transform:uppercase;">Projects Delivered</div>
+      </div>
+
+      <div class="reveal stat-divider" style="text-align:center;padding:44px 24px;">
+        <div style="font-family:'Playfair Display',serif;font-size:56px;font-weight:900;line-height:1;background:linear-gradient(135deg,#B5D429,#D4F04A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">5+</div>
+        <div style="font-size:13px;color:#A07858;margin-top:10px;letter-spacing:0.06em;text-transform:uppercase;">Years Experience</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ━━━━━━━━━━━━━━━━━━ ABOUT ━━━━━━━━━━━━━━━━━━ -->
+<section id="about" style="padding:120px 0;position:relative;overflow:hidden;">
+  <!-- Ambient glow -->
+  <div style="position:absolute;top:-60px;right:-60px;width:460px;height:460px;background:radial-gradient(ellipse,rgba(30,191,160,0.05),transparent 70%);border-radius:50%;pointer-events:none;"></div>
+  <div style="position:absolute;bottom:-80px;left:-80px;width:360px;height:360px;background:radial-gradient(ellipse,rgba(200,164,74,0.04),transparent 70%);border-radius:50%;pointer-events:none;"></div>
+
+  <div style="max-width:1280px;margin:0 auto;padding:0 28px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;" class="md:grid-cols-2 grid-cols-1">
+
+      <!-- Text -->
+      <div class="reveal">
+        <div class="section-tag" style="margin-bottom:24px;">About the Founder</div>
+        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(36px,4.8vw,58px);font-weight:700;letter-spacing:-0.025em;color:#2C1A0E;line-height:1.12;margin-bottom:24px;">
+          Hello,
+          <span style="font-family:'Dancing Script',cursive;font-size:1.15em;background:linear-gradient(95deg,#C8A44A,#E8C96A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;line-height:1;">Neeka</span>
+          here.
+        </h2>
+        <p style="font-size:17px;line-height:1.82;color:#8B6040;margin-bottom:20px;">
+          I'm Neeka Chisholm, CEO of NC – Developer, LLC — a boutique mobile and web development studio built on a simple belief: <em style="color:#C8A44A;font-style:italic;">authentic work creates lasting impact.</em>
+        </p>
+        <p style="font-size:17px;line-height:1.82;color:#8B6040;margin-bottom:40px;">
+          We specialize in building digital experiences as unique as the people behind them. Whether launching your first app or scaling an existing platform, we're here to make your vision real — beautifully and reliably.
+        </p>
+
+        <!-- Tags -->
+        <div style="display:flex;flex-wrap:wrap;gap:10px;">
+          <span class="pill" style="background:rgba(200,164,74,0.1);border:1px solid rgba(200,164,74,0.22);color:#C8A44A;">Mobile Development</span>
+          <span class="pill" style="background:rgba(30,191,160,0.1);border:1px solid rgba(30,191,160,0.22);color:#1EBFA0;">Web Applications</span>
+          <span class="pill" style="background:rgba(181,212,41,0.08);border:1px solid rgba(181,212,41,0.22);color:#B5D429;">UI/UX Design</span>
+          <span class="pill" style="background:rgba(200,164,74,0.06);border:1px solid rgba(200,164,74,0.15);color:#9A8060;">Brand Identity</span>
+        </div>
+      </div>
+
+      <!-- Card -->
+      <div class="reveal" style="position:relative;display:flex;justify-content:center;">
+        <div style="
+          background: linear-gradient(145deg, #FFFFFF 0%, #FEF6F0 100%);
+          border: 1px solid rgba(200,164,74,0.25);
+          border-radius: 20px;
+          padding: 40px;
+          width: 100%; max-width: 420px;
+          box-shadow: 0 40px 90px rgba(200,120,60,0.12),
+                      0 0 0 1px rgba(200,164,74,0.08),
+                      inset 0 1px 0 rgba(200,164,74,0.1);
+          position: relative;
+        ">
+          <!-- Avatar row -->
+          <div style="display:flex;align-items:center;gap:18px;margin-bottom:28px;">
+            <div style="
+              width:60px; height:60px; border-radius:50%;
+              background: linear-gradient(135deg,#C8A44A,#1EBFA0);
+              display:flex; align-items:center; justify-content:center;
+              font-family:'Playfair Display',serif; font-size:24px; font-weight:700; color:#FFFFFF;
+              flex-shrink:0;
+            ">N</div>
+            <div>
+              <div style="font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:#2C1A0E;line-height:1.2;">Neeka Chisholm</div>
+              <div style="font-size:13px;color:#A07858;margin-top:3px;">CEO &amp; Lead Developer</div>
+            </div>
+          </div>
+
+          <!-- Quote -->
+          <blockquote style="
+            font-size:15px; line-height:1.78; color:#9A7050;
+            font-style:italic;
+            border-left: 2.5px solid #C8A44A;
+            padding-left: 18px;
+            margin-bottom: 28px;
+          ">
+            "Transforming ideas into powerful digital realities — one elegant line of code at a time."
+          </blockquote>
+
+          <!-- Values -->
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;align-items:center;gap:12px;font-size:13px;color:#8B6040;">
+              <div style="width:6px;height:6px;border-radius:50%;background:#C8A44A;flex-shrink:0;"></div>
+              Professional &amp; polished in every deliverable
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;font-size:13px;color:#8B6040;">
+              <div style="width:6px;height:6px;border-radius:50%;background:#1EBFA0;flex-shrink:0;"></div>
+              Innovative &amp; forward-thinking by nature
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;font-size:13px;color:#8B6040;">
+              <div style="width:6px;height:6px;border-radius:50%;background:#B5D429;flex-shrink:0;"></div>
+              Approachable &amp; honest at every stage
+            </div>
+          </div>
+
+          <!-- Watermark logo -->
+          <div style="position:absolute;bottom:24px;right:24px;opacity:0.15;">
+            <img src="brand_assets/%20NC-Devs%20logo.png" alt="" aria-hidden="true" style="width:36px;height:36px;object-fit:contain;" onerror="this.style.display='none'" />
+          </div>
+        </div>
+
+        <!-- Glow accents -->
+        <div style="position:absolute;top:-20px;right:-20px;width:90px;height:90px;background:radial-gradient(ellipse,rgba(200,164,74,0.22),transparent 70%);border-radius:50%;filter:blur(14px);pointer-events:none;"></div>
+        <div style="position:absolute;bottom:-24px;left:-24px;width:110px;height:110px;background:radial-gradient(ellipse,rgba(30,191,160,0.18),transparent 70%);border-radius:50%;filter:blur(18px);pointer-events:none;"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ━━━━━━━━━━━━━━━━━━ SERVICES ━━━━━━━━━━━━━━━━━━ -->
+<section id="services" style="padding:120px 0;background:#F7E8DA;position:relative;overflow:hidden;">
+  <!-- BG accent -->
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:400px;background:radial-gradient(ellipse,rgba(30,191,160,0.04),transparent 70%);pointer-events:none;"></div>
+
+  <div style="max-width:1280px;margin:0 auto;padding:0 28px;">
+    <!-- Header -->
+    <div class="reveal" style="text-align:center;margin-bottom:64px;">
+      <div class="section-tag" style="justify-content:center;margin-bottom:20px;">What We Build</div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(36px,4.8vw,58px);font-weight:700;letter-spacing:-0.025em;color:#2C1A0E;line-height:1.12;margin-bottom:16px;">
+        Our Services
+      </h2>
+      <p style="font-size:17px;color:#A07858;max-width:440px;margin:0 auto;line-height:1.72;">
+        End-to-end digital solutions — from your first wireframe to your public launch.
+      </p>
+    </div>
+
+    <!-- Cards grid -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">
+
+      <!-- UI/UX -->
+      <div class="service-card reveal">
+        <div class="icon-badge" style="background:linear-gradient(135deg,rgba(200,164,74,0.18),rgba(200,164,74,0.04));border:1px solid rgba(200,164,74,0.2);">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#C8A44A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="20" height="20" rx="4"/>
+            <path d="M9 10h8M9 13.5h5"/>
+            <circle cx="18.5" cy="18.5" r="2"/>
+          </svg>
+        </div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:23px;font-weight:700;color:#2C1A0E;line-height:1.2;margin-bottom:14px;">
+          UI/UX Design<br />&amp; Logos
+        </h3>
+        <p style="font-size:15px;line-height:1.8;color:#8B6040;margin-bottom:28px;">
+          Pixel-perfect interfaces and brand identities that resonate. We design with purpose — every element earned, nothing arbitrary.
+        </p>
+        <div style="height:1px;background:linear-gradient(to right,rgba(200,164,74,0.28),transparent);margin-bottom:20px;"></div>
+        <a href="#contact" style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#C8A44A;letter-spacing:0.05em;text-decoration:none;transition:gap 0.2s;" onmouseover="this.style.gap='11px'" onmouseout="this.style.gap='7px'">
+          Get Started
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1.5 6h9M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <!-- Mobile Dev -->
+      <div class="service-card teal-card reveal" style="border-color:rgba(30,191,160,0.1);">
+        <div class="icon-badge" style="background:linear-gradient(135deg,rgba(30,191,160,0.18),rgba(30,191,160,0.04));border:1px solid rgba(30,191,160,0.2);">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#1EBFA0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="8" y="2" width="10" height="22" rx="2.5"/>
+            <path d="M12 19.5h2"/>
+          </svg>
+        </div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:23px;font-weight:700;color:#2C1A0E;line-height:1.2;margin-bottom:14px;">
+          Mobile App<br />Development
+        </h3>
+        <p style="font-size:15px;line-height:1.8;color:#8B6040;margin-bottom:28px;">
+          Native iOS and Android applications built for performance, reliability, and a seamless user experience across every screen.
+        </p>
+        <div style="height:1px;background:linear-gradient(to right,rgba(30,191,160,0.28),transparent);margin-bottom:20px;"></div>
+        <a href="#contact" style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#1EBFA0;letter-spacing:0.05em;text-decoration:none;transition:gap 0.2s;" onmouseover="this.style.gap='11px'" onmouseout="this.style.gap='7px'">
+          Get Started
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1.5 6h9M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <!-- Web Dev -->
+      <div class="service-card lime-card reveal" style="border-color:rgba(181,212,41,0.08);">
+        <div class="icon-badge" style="background:linear-gradient(135deg,rgba(181,212,41,0.14),rgba(181,212,41,0.03));border:1px solid rgba(181,212,41,0.18);">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#B5D429" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="5" width="22" height="17" rx="2.5"/>
+            <path d="M2 10h22M8 5v5"/>
+            <circle cx="6" cy="7.5" r="0.8" fill="#B5D429" stroke="none"/>
+            <circle cx="9.5" cy="7.5" r="0.8" fill="#B5D429" stroke="none"/>
+          </svg>
+        </div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:23px;font-weight:700;color:#2C1A0E;line-height:1.2;margin-bottom:14px;">
+          Web App<br />Development
+        </h3>
+        <p style="font-size:15px;line-height:1.8;color:#8B6040;margin-bottom:28px;">
+          Fast, responsive web applications engineered to scale. From landing pages to full-stack platforms — we deliver excellence.
+        </p>
+        <div style="height:1px;background:linear-gradient(to right,rgba(181,212,41,0.22),transparent);margin-bottom:20px;"></div>
+        <a href="#contact" style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#B5D429;letter-spacing:0.05em;text-decoration:none;transition:gap 0.2s;" onmouseover="this.style.gap='11px'" onmouseout="this.style.gap='7px'">
+          Get Started
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1.5 6h9M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ━━━━━━━━━━━━━━━━━━ PROJECTS ━━━━━━━━━━━━━━━━━━ -->
+<section id="projects" style="padding:120px 0;position:relative;overflow:hidden;">
+  <div style="position:absolute;bottom:-40px;right:-40px;width:500px;height:500px;background:radial-gradient(ellipse,rgba(200,164,74,0.04),transparent 70%);pointer-events:none;"></div>
+
+  <div style="max-width:1280px;margin:0 auto;padding:0 28px;">
+    <!-- Header -->
+    <div class="reveal" style="text-align:center;margin-bottom:64px;">
+      <div class="section-tag" style="justify-content:center;margin-bottom:20px;">Built In-House</div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(36px,4.8vw,58px);font-weight:700;letter-spacing:-0.025em;color:#2C1A0E;line-height:1.12;margin-bottom:16px;">
+        Our Owned Apps
+      </h2>
+      <p style="font-size:17px;color:#A07858;max-width:440px;margin:0 auto;line-height:1.72;">
+        Products we've designed, built, and launched under the NC – Developer brand.
+      </p>
+    </div>
+
+    <!-- Cards -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">
+
+      <!-- Shopper's Retreat -->
+      <div class="project-card gold-proj reveal">
+        <div style="height:5px;background:linear-gradient(90deg,#C8A44A,#E8C96A,#9A7A2E);"></div>
+        <div style="padding:36px;">
+          <div style="font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#C8A44A;margin-bottom:14px;">Shopping &amp; Lifestyle</div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#2C1A0E;line-height:1.2;margin-bottom:16px;">
+            Shopper's Retreat
+          </h3>
+          <p style="font-size:15px;line-height:1.8;color:#8B6040;margin-bottom:28px;">
+            An inspiring app celebrating and empowering aging adults — making shopping accessible, joyful, and dignified.
+          </p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <span class="pill" style="background:rgba(200,164,74,0.09);border:1px solid rgba(200,164,74,0.18);color:#C8A44A;">iOS</span>
+            <span class="pill" style="background:rgba(200,164,74,0.09);border:1px solid rgba(200,164,74,0.18);color:#C8A44A;">Android</span>
+            <span class="pill" style="background:rgba(200,164,74,0.14);border:1px solid rgba(200,164,74,0.28);color:#E8C96A;">Live</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hz Zen -->
+      <div class="project-card teal-proj reveal" style="border-color:rgba(30,191,160,0.1);">
+        <div style="height:5px;background:linear-gradient(90deg,#1EBFA0,#4EDBC5,#0F8F76);"></div>
+        <div style="padding:36px;">
+          <div style="font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#1EBFA0;margin-bottom:14px;">Wellness &amp; Sound</div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#2C1A0E;line-height:1.2;margin-bottom:16px;">
+            Hz Zen
+          </h3>
+          <p style="font-size:15px;line-height:1.8;color:#8B6040;margin-bottom:28px;">
+            Discover the power of sound therapy. Immersive frequency experiences designed to promote healing, focus, and calm.
+          </p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <span class="pill" style="background:rgba(30,191,160,0.09);border:1px solid rgba(30,191,160,0.18);color:#1EBFA0;">iOS</span>
+            <span class="pill" style="background:rgba(30,191,160,0.09);border:1px solid rgba(30,191,160,0.18);color:#1EBFA0;">Android</span>
+            <span class="pill" style="background:rgba(30,191,160,0.14);border:1px solid rgba(30,191,160,0.3);color:#4EDBC5;">Live</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- EchoVerse -->
+      <div class="project-card lime-proj reveal" style="border-color:rgba(181,212,41,0.08);">
+        <div style="height:5px;background:linear-gradient(90deg,#B5D429,#D4F04A,#8AAA10);"></div>
+        <div style="padding:36px;">
+          <div style="font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#B5D429;margin-bottom:14px;">Coming Soon</div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#2C1A0E;line-height:1.2;margin-bottom:16px;">
+            EchoVerse
+          </h3>
+          <p style="font-size:15px;line-height:1.8;color:#8B6040;margin-bottom:28px;">
+            Our next groundbreaking project is in development. Something big is coming — stay connected and be the first to know.
+          </p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <span class="pill" style="background:rgba(181,212,41,0.07);border:1px solid rgba(181,212,41,0.2);color:#B5D429;">In Development</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ━━━━━━━━━━━━━━━━━━ CTA SECTION ━━━━━━━━━━━━━━━━━━ -->
+<section id="contact" class="grain" style="padding:120px 0;background:#F7E8DA;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 65% 55% at 50% 50%,rgba(200,164,74,0.07),transparent 70%);pointer-events:none;"></div>
+
+  <div style="max-width:760px;margin:0 auto;padding:0 28px;text-align:center;position:relative;z-index:2;">
+    <div class="reveal">
+      <div class="section-tag" style="justify-content:center;margin-bottom:24px;">Let's Work Together</div>
+
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(40px,6vw,70px);font-weight:900;letter-spacing:-0.03em;color:#2C1A0E;line-height:1.06;margin-bottom:22px;">
+        Ready to Build<br />
+        <span style="font-family:'Dancing Script',cursive;font-size:1.08em;background:linear-gradient(95deg,#C8A44A 20%,#1EBFA0 80%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;line-height:1.2;">Something Great?</span>
+      </h2>
+
+      <p style="font-size:17px;line-height:1.78;color:#A07858;margin-bottom:44px;max-width:500px;margin-left:auto;margin-right:auto;">
+        Book a free consultation and let's talk about your project. No pressure — just a conversation about what's possible.
+      </p>
+
+      <a href="https://calendar.google.com" target="_blank" rel="noopener noreferrer" class="btn-gold" style="padding:16px 40px;font-size:16px;margin-bottom:60px;">
+        Book a Free Consultation
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h12M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+
+    <!-- Social + Location -->
+    <div class="reveal" style="display:flex;flex-wrap:wrap;justify-content:center;gap:28px;border-top:1px solid rgba(200,164,74,0.25);padding-top:48px;">
+
+      <div style="display:flex;align-items:center;gap:9px;font-size:13px;color:#A07858;">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="#C8A44A" stroke-width="1.4" stroke-linecap="round">
+          <path d="M7.5 8.5a3 3 0 100-6 3 3 0 000 6z"/>
+          <path d="M2 13.5c0-2.8 2.46-5.1 5.5-5.1s5.5 2.3 5.5 5.1"/>
+        </svg>
+        Rosedale, Maryland
+      </div>
+
+      <a href="https://youtube.com" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:9px;font-size:13px;color:#A07858;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#C8A44A'" onmouseout="this.style.color='#A07858'">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="#C8A44A" stroke-width="1.4" stroke-linecap="round"><rect x="1" y="3.5" width="13" height="9" rx="2.5"/><path d="M6 6l3 1.5L6 9V6z" fill="#C8A44A" stroke="none"/></svg>
+        YouTube
+      </a>
+
+      <a href="https://tiktok.com" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:9px;font-size:13px;color:#A07858;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#C8A44A'" onmouseout="this.style.color='#A07858'">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="#C8A44A" stroke-width="1.4" stroke-linecap="round"><path d="M9.5 1v8a2.5 2.5 0 11-2.5-2.5h.5V4.3A5.5 5.5 0 0014 9.8"/></svg>
+        TikTok
+      </a>
+
+      <a href="https://instagram.com" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:9px;font-size:13px;color:#A07858;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#C8A44A'" onmouseout="this.style.color='#A07858'">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="#C8A44A" stroke-width="1.4" stroke-linecap="round"><rect x="1.5" y="1.5" width="12" height="12" rx="3.5"/><circle cx="7.5" cy="7.5" r="2.8"/><circle cx="11.2" cy="3.8" r="0.6" fill="#C8A44A" stroke="none"/></svg>
+        Instagram
+      </a>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ━━━━━━━━━━━━━━━━━━ FOOTER ━━━━━━━━━━━━━━━━━━ -->
+<footer style="background:#EDD8C8;border-top:1px solid rgba(200,164,74,0.25);padding:28px;">
+  <div style="max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;">
+
+    <div style="display:flex;align-items:center;gap:12px;">
+      <img src="brand_assets/%20NC-Devs%20logo.png" alt="NC Developer logo" style="width:30px;height:30px;object-fit:contain;opacity:0.55;" onerror="this.style.display='none'" />
+      <span style="font-family:'Playfair Display',serif;font-size:14px;color:#8B6040;">NC – Developer, LLC</span>
+    </div>
+
+    <div style="font-size:12px;color:#A07858;">
+      © 2024 NC – Developer, LLC. All rights reserved.&nbsp;&nbsp;|&nbsp;&nbsp;Rosedale, Maryland
+    </div>
+
+    <div style="display:flex;gap:18px;font-size:12px;">
+      <a href="#" style="color:#A07858;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#C8A44A'" onmouseout="this.style.color='#A07858'">Privacy Policy</a>
+      <span style="color:#D4A880;">·</span>
+      <a href="#" style="color:#A07858;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#C8A44A'" onmouseout="this.style.color='#A07858'">Terms of Service</a>
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- ━━━━━━━━━━━━━━━━━━ SCRIPTS ━━━━━━━━━━━━━━━━━━ -->
+<script>
+  /* Hero fade-up keyframe (inline) */
+  const fadeStyle = document.createElement('style');
+  fadeStyle.textContent = `
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes shimmy {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .shimmy-gold-green {
+      background: linear-gradient(95deg, #C8A44A, #E8C96A, #1EBFA0, #E8C96A, #C8A44A);
+      background-size: 300% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmy 3s ease-in-out 2s infinite;
+    }
+  `;
+  document.head.appendChild(fadeStyle);
+
+  /* Mobile nav toggle */
+  let navOpen = false;
+  function toggleNav() {
+    navOpen = !navOpen;
+    const menu = document.getElementById('mobile-nav');
+    const h1 = document.getElementById('hb1');
+    const h2 = document.getElementById('hb2');
+    const h3 = document.getElementById('hb3');
+    if (navOpen) {
+      menu.style.display = 'flex';
+      h1.style.transform = 'translateY(6.5px) rotate(45deg)';
+      h2.style.opacity = '0';
+      h3.style.transform = 'translateY(-6.5px) rotate(-45deg)';
+    } else {
+      menu.style.display = 'none';
+      h1.style.transform = '';
+      h2.style.opacity = '';
+      h3.style.transform = '';
+    }
+  }
+  function closeNav() {
+    navOpen = false;
+    const menu = document.getElementById('mobile-nav');
+    const h1 = document.getElementById('hb1');
+    const h2 = document.getElementById('hb2');
+    const h3 = document.getElementById('hb3');
+    menu.style.display = 'none';
+    h1.style.transform = h2.style.opacity = h3.style.transform = '';
+  }
+
+  /* Scroll-reveal with stagger */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const siblings = Array.from(entry.target.parentElement.querySelectorAll('.reveal'));
+      const idx = siblings.indexOf(entry.target);
+      entry.target.style.transitionDelay = `${idx * 0.08}s`;
+      entry.target.classList.add('visible');
+      io.unobserve(entry.target);
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* Navbar shadow on scroll */
+  window.addEventListener('scroll', () => {
+    const nb = document.getElementById('navbar');
+    if (window.scrollY > 40) {
+      nb.style.boxShadow = '0 4px 32px rgba(0,0,0,0.4)';
+    } else {
+      nb.style.boxShadow = 'none';
+    }
+  }, { passive: true });
+</script>
+
+
+<!-- ━━━━━━━━━━━━━━━━━━ SPIRAL ANIMATION ━━━━━━━━━━━━━━━━━━ -->
+<script>
+(function initSpiral() {
+  if (typeof gsap === 'undefined') return;
+
+  /* ── Vector helpers ── */
+  class Vector2D {
+    constructor(x, y) { this.x = x; this.y = y; }
+    static random(min, max) { return min + Math.random() * (max - min); }
+  }
+  class Vector3D {
+    constructor(x, y, z) { this.x = x; this.y = y; this.z = z; }
+  }
+
+  /* ── Star ── */
+  class Star {
+    constructor(cameraZ, cameraTravelDistance) {
+      this.angle             = Math.random() * Math.PI * 2;
+      this.distance          = 30 * Math.random() + 15;
+      this.rotationDirection = Math.random() > 0.5 ? 1 : -1;
+      this.expansionRate     = 1.2 + Math.random() * 0.8;
+      this.finalScale        = 0.7 + Math.random() * 0.6;
+      this.dx = this.distance * Math.cos(this.angle);
+      this.dy = this.distance * Math.sin(this.angle);
+      this.spiralLocation     = (1 - Math.pow(1 - Math.random(), 3.0)) / 1.3;
+      this.z = Vector2D.random(0.5 * cameraZ, cameraTravelDistance + cameraZ);
+      this.z = this.z * (1 - 0.3 * this.spiralLocation) + (cameraTravelDistance / 2) * (0.3 * this.spiralLocation);
+      this.strokeWeightFactor = Math.pow(Math.random(), 2.0);
+    }
+
+    render(p, c) {
+      const spiralPos = c.spiralPath(this.spiralLocation);
+      const q = p - this.spiralLocation;
+      if (q <= 0) return;
+
+      const dp = c.constrain(4 * q, 0, 1);
+      const lin = dp, ela = c.easeOutElastic(dp), pow = dp * dp;
+      let easing;
+      if      (dp < 0.3) easing = c.lerp(lin, pow, dp / 0.3);
+      else if (dp < 0.7) easing = c.lerp(pow, ela, (dp - 0.3) / 0.4);
+      else               easing = ela;
+
+      let sx, sy;
+      if (dp < 0.3) {
+        sx = c.lerp(spiralPos.x, spiralPos.x + this.dx * 0.3, easing / 0.3);
+        sy = c.lerp(spiralPos.y, spiralPos.y + this.dy * 0.3, easing / 0.3);
+      } else if (dp < 0.7) {
+        const mp = (dp - 0.3) / 0.4;
+        const cs = Math.sin(mp * Math.PI) * this.rotationDirection * 1.5;
+        const bx = spiralPos.x + this.dx * 0.3, by = spiralPos.y + this.dy * 0.3;
+        const tx = spiralPos.x + this.dx * 0.7, ty = spiralPos.y + this.dy * 0.7;
+        sx = c.lerp(bx, tx, mp) + (-this.dy * 0.4 * cs) * mp;
+        sy = c.lerp(by, ty, mp) + ( this.dx * 0.4 * cs) * mp;
+      } else {
+        const fp = (dp - 0.7) / 0.3;
+        const bx = spiralPos.x + this.dx * 0.7, by = spiralPos.y + this.dy * 0.7;
+        const td = this.distance * this.expansionRate * 1.5;
+        const sa = this.angle + 1.2 * this.rotationDirection * fp * Math.PI;
+        sx = c.lerp(bx, spiralPos.x + td * Math.cos(sa), fp);
+        sy = c.lerp(by, spiralPos.y + td * Math.sin(sa), fp);
+      }
+
+      const vx = (this.z - c.cameraZ) * sx / c.viewZoom;
+      const vy = (this.z - c.cameraZ) * sy / c.viewZoom;
+      let sm = dp < 0.6 ? 1.0 + dp * 0.2 : c.lerp(1.2, this.finalScale, (dp - 0.6) / 0.4);
+      c.showProjectedDot(new Vector3D(vx, vy, this.z), 8.5 * this.strokeWeightFactor * sm);
+    }
+  }
+
+  /* ── AnimationController ── */
+  class AnimationController {
+    constructor(canvas, ctx, dpr, size) {
+      this.canvas              = canvas;
+      this.ctx                 = ctx;
+      this.dpr                 = dpr;
+      this.size                = size;
+      this.time                = 0;
+      this.stars               = [];
+      this.changeEventTime     = 0.32;
+      this.cameraZ             = -400;
+      this.cameraTravelDistance= 3400;
+      this.startDotYOffset     = 28;
+      this.viewZoom            = 100;
+      this.numberOfStars       = 5000;
+      this.trailLength         = 80;
+
+      // Seeded first pass for deterministic star layout
+      const orig = Math.random;
+      let seed = 1234;
+      Math.random = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+      this._buildStars();
+      Math.random = orig;
+      // Second pass with real random for variety
+      this._buildStars();
+
+      this._setupTimeline();
+    }
+
+    _buildStars() {
+      for (let i = 0; i < this.numberOfStars; i++)
+        this.stars.push(new Star(this.cameraZ, this.cameraTravelDistance));
+    }
+
+    _setupTimeline() {
+      this.timeline = gsap.timeline({ repeat: -1 });
+      this.timeline.to(this, { time: 1, duration: 15, repeat: -1, ease: 'none', onUpdate: () => this.render() });
+    }
+
+    ease(p, g)           { return p < 0.5 ? 0.5 * Math.pow(2*p,g) : 1 - 0.5 * Math.pow(2*(1-p),g); }
+    easeOutElastic(x)    { if (x<=0) return 0; if (x>=1) return 1; const c4=(2*Math.PI)/4.5; return Math.pow(2,-8*x)*Math.sin((x*8-0.75)*c4)+1; }
+    map(v,s1,e1,s2,e2)   { return s2+(e2-s2)*((v-s1)/(e1-s1)); }
+    constrain(v,mn,mx)   { return Math.min(Math.max(v,mn),mx); }
+    lerp(a,b,t)          { return a*(1-t)+b*t; }
+
+    spiralPath(p) {
+      p = this.constrain(1.2*p, 0, 1);
+      p = this.ease(p, 1.8);
+      const theta = 2*Math.PI*6*Math.sqrt(p), r = 170*Math.sqrt(p);
+      return new Vector2D(r*Math.cos(theta), r*Math.sin(theta) + this.startDotYOffset);
+    }
+
+    rotate(v1, v2, p, orientation) {
+      const mx = (v1.x+v2.x)/2, my = (v1.y+v2.y)/2;
+      const dx = v1.x-mx, dy = v1.y-my;
+      const angle = Math.atan2(dy,dx), o = orientation ? -1 : 1;
+      const r = Math.sqrt(dx*dx+dy*dy);
+      const bounce = Math.sin(p*Math.PI)*0.05*(1-p);
+      return new Vector2D(
+        mx + r*(1+bounce)*Math.cos(angle + o*Math.PI*this.easeOutElastic(p)),
+        my + r*(1+bounce)*Math.sin(angle + o*Math.PI*this.easeOutElastic(p))
+      );
+    }
+
+    showProjectedDot(position, sizeFactor) {
+      const t2 = this.constrain(this.map(this.time, this.changeEventTime, 1, 0, 1), 0, 1);
+      const newCamZ = this.cameraZ + this.ease(Math.pow(t2,1.2),1.8)*this.cameraTravelDistance;
+      if (position.z > newCamZ) {
+        const depth = position.z - newCamZ;
+        const x = this.viewZoom * position.x / depth;
+        const y = this.viewZoom * position.y / depth;
+        const sw = 400 * sizeFactor / depth;
+        this.ctx.lineWidth = sw;
+        this.ctx.beginPath();
+        this.ctx.arc(x, y, 0.5, 0, Math.PI*2);
+        this.ctx.fill();
+      }
+    }
+
+    render() {
+      const ctx = this.ctx;
+      // Warm dark background matching brand
+      ctx.fillStyle = '#0E0906';
+      ctx.fillRect(0, 0, this.size, this.size);
+      ctx.save();
+      ctx.translate(this.size/2, this.size/2);
+
+      const t1 = this.constrain(this.map(this.time, 0, this.changeEventTime+0.25, 0, 1), 0, 1);
+      const t2 = this.constrain(this.map(this.time, this.changeEventTime, 1, 0, 1), 0, 1);
+      ctx.rotate(-Math.PI * this.ease(t2, 2.7));
+
+      // Trail — gold
+      for (let i = 0; i < this.trailLength; i++) {
+        const f  = this.map(i, 0, this.trailLength, 1.1, 0.1);
+        const sw = (1.3*(1-t1) + 3.0*Math.sin(Math.PI*t1)) * f;
+        ctx.fillStyle = 'rgba(200,164,74,0.92)';
+        ctx.lineWidth = sw;
+        const pt  = this.spiralPath(t1 - 0.00015*i);
+        const off = new Vector2D(pt.x+5, pt.y+5);
+        const rot = this.rotate(pt, off, Math.sin(this.time*Math.PI*2)*0.5+0.5, i%2===0);
+        ctx.beginPath();
+        ctx.arc(rot.x, rot.y, sw/2, 0, Math.PI*2);
+        ctx.fill();
+      }
+
+      // Stars — warm gold tint
+      ctx.fillStyle = 'rgba(232,201,106,0.88)';
+      for (const star of this.stars) star.render(t1, this);
+
+      // Start dot
+      if (this.time > this.changeEventTime) {
+        const dy = this.cameraZ * this.startDotYOffset / this.viewZoom;
+        this.showProjectedDot(new Vector3D(0, dy, this.cameraTravelDistance), 2.5);
+      }
+
+      ctx.restore();
+    }
+
+    destroy() { this.timeline.kill(); }
+  }
+
+  /* ── Mount ── */
+  function mountSpiral() {
+    const canvas = document.getElementById('spiral-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const CANVAS_SIZE = 520;
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width  = CANVAS_SIZE * dpr;
+    canvas.height = CANVAS_SIZE * dpr;
+    canvas.style.width  = CANVAS_SIZE + 'px';
+    canvas.style.height = CANVAS_SIZE + 'px';
+    ctx.scale(dpr, dpr);
+
+    const controller = new AnimationController(canvas, ctx, dpr, CANVAS_SIZE);
+
+    // Pause when off-screen to save CPU
+    const io = new IntersectionObserver(entries => {
+      entries[0].isIntersecting ? controller.timeline.play() : controller.timeline.pause();
+    });
+    io.observe(canvas);
+  }
+
+  if (document.readyState === 'loading')
+    document.addEventListener('DOMContentLoaded', mountSpiral);
+  else
+    mountSpiral();
+})();
+</script>
+
+</body>
+</html>
