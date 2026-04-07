@@ -41,3 +41,7 @@ logs/
 .cache/
 *.swp
 *~
+
+# Screenshots (keep folder, ignore contents)
+screenshots/*.png
+screenshots/*.jpg
