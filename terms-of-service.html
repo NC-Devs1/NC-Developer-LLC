@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service | NC – Developer, LLC</title>
+  <meta name="description" content="Terms of Service for NC – Developer, LLC. Governing law: Maryland. Review our terms before using our services." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: #FDF3EC;
+      color: #2C1A0E;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.8;
+    }
+
+    /* ── Nav ── */
+    nav {
+      background: #EDD8C8;
+      border-bottom: 1px solid rgba(200,164,74,0.25);
+      padding: 18px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    nav a.logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: #2C1A0E;
+      text-decoration: none;
+    }
+    nav a.back {
+      font-size: 13px;
+      color: #A07858;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    nav a.back:hover { color: #C8A44A; }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #EDD8C8 0%, #FDF3EC 100%);
+      border-bottom: 1px solid rgba(200,164,74,0.2);
+      padding: 64px 32px 48px;
+      text-align: center;
+    }
+    .hero .badge {
+      display: inline-block;
+      background: rgba(200,164,74,0.15);
+      border: 1px solid rgba(200,164,74,0.4);
+      color: #9A7A2E;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 5vw, 58px);
+      font-weight: 900;
+      line-height: 1.1;
+      color: #2C1A0E;
+      margin-bottom: 16px;
+    }
+    .hero h1 span {
+      background: linear-gradient(95deg, #C8A44A, #E8C96A, #1EBFA0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 15px;
+      color: #8B6040;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* ── Content ── */
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 56px 32px 80px;
+    }
+
+    .toc {
+      background: rgba(200,164,74,0.08);
+      border: 1px solid rgba(200,164,74,0.25);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 48px;
+    }
+    .toc h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #2C1A0E;
+      margin-bottom: 14px;
+    }
+    .toc ol { padding-left: 18px; }
+    .toc li { font-size: 14px; margin-bottom: 6px; }
+    .toc a { color: #9A7A2E; text-decoration: none; transition: color 0.2s; }
+    .toc a:hover { color: #C8A44A; text-decoration: underline; }
+
+    section.policy { margin-bottom: 48px; }
+    section.policy h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #2C1A0E;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(200,164,74,0.3);
+    }
+    section.policy h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: #5C3A1E;
+      margin: 20px 0 8px;
+    }
+    section.policy p {
+      font-size: 15px;
+      color: #4A2C10;
+      margin-bottom: 14px;
+    }
+    section.policy ul, section.policy ol {
+      padding-left: 22px;
+      margin-bottom: 14px;
+    }
+    section.policy li {
+      font-size: 15px;
+      color: #4A2C10;
+      margin-bottom: 6px;
+    }
+
+    .highlight-box {
+      background: rgba(30,191,160,0.08);
+      border-left: 3px solid #1EBFA0;
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin: 20px 0;
+    }
+    .highlight-box p { margin-bottom: 0 !important; font-size: 14px; color: #0F5C4A; }
+
+    .warning-box {
+      background: rgba(200,164,74,0.1);
+      border-left: 3px solid #C8A44A;
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin: 20px 0;
+    }
+    .warning-box p { margin-bottom: 0 !important; font-size: 14px; color: #6B4A1A; }
+
+    .caps {
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.7;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: #EDD8C8;
+      border-top: 1px solid rgba(200,164,74,0.25);
+      padding: 28px 32px;
+    }
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    footer span { font-family: 'Playfair Display', serif; font-size: 14px; color: #8B6040; }
+    .footer-copy { font-size: 12px; color: #A07858; }
+    .footer-links { display: flex; gap: 18px; font-size: 12px; }
+    .footer-links a { color: #A07858; text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: #C8A44A; }
+    .footer-links .dot { color: #D4A880; }
+  </style>
+</head>
+<body>
+
+<!-- ── Nav ── -->
+<nav>
+  <a class="logo" href="index.html">NC – Developer, LLC</a>
+  <a class="back" href="index.html">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#A07858" stroke-width="1.5" stroke-linecap="round"><path d="M9 2L4 7l5 5"/></svg>
+    Back to Home
+  </a>
+</nav>
+
+<!-- ── Hero ── -->
+<div class="hero">
+  <div class="badge">Legal</div>
+  <h1>Terms of <span>Service</span></h1>
+  <p>Effective Date: April 7, 2026 &nbsp;·&nbsp; Last Updated: April 7, 2026</p>
+</div>
+
+<!-- ── Content ── -->
+<div class="container">
+
+  <div class="warning-box">
+    <p><strong>Please read these Terms of Service carefully.</strong> By accessing our website or engaging our services, you agree to be bound by these terms. These Terms are governed by the laws of the State of Maryland.</p>
+  </div>
+
+  <!-- Table of Contents -->
+  <div class="toc">
+    <h2>Table of Contents</h2>
+    <ol>
+      <li><a href="#agreement">Agreement to Terms</a></li>
+      <li><a href="#company-info">Company Information &amp; Maryland LLC Status</a></li>
+      <li><a href="#services">Services Offered</a></li>
+      <li><a href="#eligibility">Eligibility</a></li>
+      <li><a href="#client-agreements">Client Agreements &amp; Project Terms</a></li>
+      <li><a href="#payment">Payment Terms</a></li>
+      <li><a href="#intellectual-property">Intellectual Property</a></li>
+      <li><a href="#acceptable-use">Acceptable Use</a></li>
+      <li><a href="#disclaimer">Disclaimer of Warranties</a></li>
+      <li><a href="#limitation">Limitation of Liability</a></li>
+      <li><a href="#indemnification">Indemnification</a></li>
+      <li><a href="#governing-law">Governing Law &amp; Dispute Resolution</a></li>
+      <li><a href="#consumer-protection">Maryland Consumer Protection Compliance</a></li>
+      <li><a href="#privacy">Privacy</a></li>
+      <li><a href="#termination">Termination</a></li>
+      <li><a href="#changes">Changes to These Terms</a></li>
+      <li><a href="#contact">Contact Information</a></li>
+    </ol>
+  </div>
+
+  <!-- 1 -->
+  <section class="policy" id="agreement">
+    <h2>1. Agreement to Terms</h2>
+    <p>By accessing or using the website at <strong>ncdeveloper.com</strong> (the "Site") or engaging the services of <strong>NC – Developer, LLC</strong> ("Company," "we," "us," or "our"), you ("Client," "User," or "you") agree to be legally bound by these Terms of Service ("Terms") and our Privacy Policy, which is incorporated herein by reference.</p>
+    <p>If you do not agree to these Terms, you must not access the Site or engage our services. These Terms constitute a legally binding agreement under the laws of the State of Maryland.</p>
+  </section>
+
+  <!-- 2 -->
+  <section class="policy" id="company-info">
+    <h2>2. Company Information &amp; Maryland LLC Status</h2>
+    <p>NC – Developer, LLC is a Maryland limited liability company duly formed and registered with the <strong>Maryland State Department of Assessments and Taxation (SDAT)</strong> under the Maryland Limited Liability Company Act (Md. Code, Corps. &amp; Assocs. § 4A-101 et seq.).</p>
+    <ul>
+      <li><strong>Business Name:</strong> NC – Developer, LLC</li>
+      <li><strong>Business Type:</strong> Maryland Limited Liability Company</li>
+      <li><strong>Principal Office:</strong> Rosedale, Maryland</li>
+      <li><strong>Registered Agent:</strong> On file with SDAT as required by Maryland law</li>
+      <li><strong>Annual Report:</strong> Filed with SDAT by April 15 each year in compliance with Maryland law</li>
+    </ul>
+    <div class="highlight-box">
+      <p>As a Maryland LLC, our members' personal liability is limited in accordance with the Maryland Limited Liability Company Act. The Company is a separate legal entity from its members.</p>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="policy" id="services">
+    <h2>3. Services Offered</h2>
+    <p>NC – Developer, LLC provides boutique mobile and web application development services, including but not limited to:</p>
+    <ul>
+      <li>Custom mobile application development (iOS and Android)</li>
+      <li>Web application and website design and development</li>
+      <li>UI/UX design and prototyping</li>
+      <li>Technical consulting and product strategy</li>
+      <li>Maintenance, support, and iterative development</li>
+    </ul>
+    <p>Specific scope, deliverables, timelines, and pricing for any project are governed by a separate written <strong>Statement of Work (SOW)</strong> or service agreement entered into with each client. In the event of any conflict between these Terms and a signed SOW, the SOW shall govern.</p>
+  </section>
+
+  <!-- 4 -->
+  <section class="policy" id="eligibility">
+    <h2>4. Eligibility</h2>
+    <p>To engage our services or use this Site, you represent that:</p>
+    <ul>
+      <li>You are at least 18 years of age or the age of majority in your jurisdiction</li>
+      <li>If acting on behalf of a business entity, you have authority to bind that entity to these Terms</li>
+      <li>Your use of our services will not violate any applicable law or regulation</li>
+      <li>All information you provide to us is accurate, current, and complete</li>
+    </ul>
+  </section>
+
+  <!-- 5 -->
+  <section class="policy" id="client-agreements">
+    <h2>5. Client Agreements &amp; Project Terms</h2>
+    <h3>Project Initiation</h3>
+    <p>All client projects require a signed Statement of Work or service agreement before work begins. Project initiation is contingent upon receipt of any required deposit as specified in the agreement.</p>
+
+    <h3>Client Responsibilities</h3>
+    <p>Clients are responsible for providing timely feedback, required assets and content, access credentials, and approvals necessary for project completion. Delays caused by client inaction may affect project timelines without penalty to NC – Developer, LLC.</p>
+
+    <h3>Revisions</h3>
+    <p>The number of included revisions is specified in each project agreement. Additional revisions beyond the agreed scope will be billed at our standard hourly rate.</p>
+
+    <h3>Confidentiality</h3>
+    <p>Both parties agree to keep confidential any proprietary or sensitive information shared during the course of the engagement. This obligation survives termination of the service agreement.</p>
+  </section>
+
+  <!-- 6 -->
+  <section class="policy" id="payment">
+    <h2>6. Payment Terms</h2>
+    <ul>
+      <li>Payment terms are established in each project's Statement of Work or service agreement</li>
+      <li>Invoices are due within 14 days of issuance unless otherwise agreed in writing</li>
+      <li>A late fee of 1.5% per month (18% per annum) may be applied to overdue balances, consistent with Maryland commercial law</li>
+      <li>NC – Developer, LLC reserves the right to suspend work on any project with an overdue balance exceeding 30 days</li>
+      <li>All prices are quoted in U.S. Dollars. Applicable Maryland sales tax will be added where required by law</li>
+      <li>Deposits paid are non-refundable once work has commenced, unless otherwise specified in the service agreement</li>
+    </ul>
+    <div class="warning-box">
+      <p>In the event of non-payment, NC – Developer, LLC reserves all rights under Maryland law, including the right to pursue collection through the Maryland court system and to retain a lien on deliverables until payment is received in full.</p>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section class="policy" id="intellectual-property">
+    <h2>7. Intellectual Property</h2>
+    <h3>Client Deliverables</h3>
+    <p>Upon receipt of full payment, NC – Developer, LLC assigns to the client all rights, title, and interest in the custom-developed deliverables specified in the project agreement, except for any Third-Party Components (see below).</p>
+
+    <h3>Third-Party Components</h3>
+    <p>Deliverables may include open-source libraries, frameworks, or third-party components. These remain subject to their respective licenses, and clients are responsible for compliance with those licenses.</p>
+
+    <h3>NC – Developer Retained Rights</h3>
+    <p>NC – Developer, LLC retains all rights to its proprietary methodologies, frameworks, tools, know-how, and general knowledge acquired during the course of the engagement. We also reserve the right to display completed work in our portfolio unless a written non-disclosure agreement specifies otherwise.</p>
+
+    <h3>Site Content</h3>
+    <p>All content on this Site — including text, graphics, logos, icons, and images — is the property of NC – Developer, LLC and protected by U.S. copyright law. Unauthorized reproduction or use is prohibited.</p>
+  </section>
+
+  <!-- 8 -->
+  <section class="policy" id="acceptable-use">
+    <h2>8. Acceptable Use</h2>
+    <p>You agree not to use this Site or our services to:</p>
+    <ul>
+      <li>Violate any applicable local, state, federal, or international law or regulation</li>
+      <li>Transmit any material that is unlawful, harmful, defamatory, obscene, or fraudulent</li>
+      <li>Interfere with or disrupt the integrity or performance of our Site or services</li>
+      <li>Attempt to gain unauthorized access to any part of our systems or networks</li>
+      <li>Use any automated means to scrape, crawl, or extract data from this Site</li>
+      <li>Impersonate any person or entity or misrepresent your affiliation</li>
+      <li>Engage in any deceptive trade practice prohibited under the Maryland Consumer Protection Act</li>
+    </ul>
+    <p>Violations may result in immediate termination of your access and engagement, and may be reported to appropriate law enforcement authorities.</p>
+  </section>
+
+  <!-- 9 -->
+  <section class="policy" id="disclaimer">
+    <h2>9. Disclaimer of Warranties</h2>
+    <p class="caps">THE SITE AND ANY INFORMATION PROVIDED THEREON ARE PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, OR COURSE OF PERFORMANCE.</p>
+    <p>NC – Developer, LLC does not warrant that: (a) the Site will be uninterrupted, error-free, or secure; (b) the results obtained from use of the Site will be accurate or reliable; or (c) any errors will be corrected.</p>
+    <p>Some jurisdictions do not allow the exclusion of implied warranties, so some of the above exclusions may not apply to you. To the extent required by Maryland law, including the Maryland Consumer Protection Act, this disclaimer shall be construed to permit only the maximum limitation allowed by law.</p>
+  </section>
+
+  <!-- 10 -->
+  <section class="policy" id="limitation">
+    <h2>10. Limitation of Liability</h2>
+    <p class="caps">TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE MARYLAND LAW, NC – DEVELOPER, LLC, ITS MEMBERS, MANAGERS, EMPLOYEES, AND AGENTS SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, PUNITIVE, OR EXEMPLARY DAMAGES, INCLUDING BUT NOT LIMITED TO LOSS OF PROFITS, REVENUE, DATA, GOODWILL, OR BUSINESS OPPORTUNITIES, ARISING OUT OF OR IN CONNECTION WITH THESE TERMS OR YOUR USE OF OUR SERVICES, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</p>
+    <p class="caps">IN NO EVENT SHALL THE TOTAL LIABILITY OF NC – DEVELOPER, LLC TO YOU FOR ALL CLAIMS ARISING OUT OF OR RELATING TO THESE TERMS OR OUR SERVICES EXCEED THE GREATER OF: (A) THE TOTAL AMOUNTS PAID BY YOU TO NC – DEVELOPER, LLC IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM; OR (B) ONE HUNDRED U.S. DOLLARS ($100).</p>
+    <div class="highlight-box">
+      <p>Maryland law may provide you with additional rights. Nothing in this section limits rights that cannot be waived under the Maryland Consumer Protection Act or other applicable law.</p>
+    </div>
+  </section>
+
+  <!-- 11 -->
+  <section class="policy" id="indemnification">
+    <h2>11. Indemnification</h2>
+    <p>You agree to defend, indemnify, and hold harmless NC – Developer, LLC and its members, managers, employees, and agents from and against any claims, liabilities, damages, judgments, awards, losses, costs, expenses, or fees (including reasonable attorneys' fees) arising out of or relating to:</p>
+    <ul>
+      <li>Your violation of these Terms</li>
+      <li>Your use of our Site or services in an unauthorized or unlawful manner</li>
+      <li>Your violation of any third-party right, including intellectual property rights</li>
+      <li>Any content or materials you provide to us in connection with a project</li>
+    </ul>
+  </section>
+
+  <!-- 12 -->
+  <section class="policy" id="governing-law">
+    <h2>12. Governing Law &amp; Dispute Resolution</h2>
+    <h3>Governing Law</h3>
+    <p>These Terms and any dispute arising out of or related to them or our services shall be governed by and construed in accordance with the laws of the <strong>State of Maryland</strong>, without regard to its conflict of law provisions.</p>
+
+    <h3>Jurisdiction &amp; Venue</h3>
+    <p>Any legal action or proceeding arising under these Terms shall be brought exclusively in the state or federal courts located in <strong>Baltimore County or Baltimore City, Maryland</strong>, and the parties hereby consent to personal jurisdiction and venue in those courts.</p>
+
+    <h3>Informal Resolution</h3>
+    <p>Before filing any formal legal action, the parties agree to attempt in good faith to resolve any dispute informally by contacting NC – Developer, LLC at <strong>legal@ncdeveloper.com</strong>. We will respond within 30 days. If the dispute cannot be resolved informally within 60 days, either party may pursue formal legal remedies.</p>
+
+    <h3>Attorneys' Fees</h3>
+    <p>In any dispute arising from these Terms, the prevailing party shall be entitled to recover reasonable attorneys' fees and costs to the extent permitted by Maryland law.</p>
+  </section>
+
+  <!-- 13 -->
+  <section class="policy" id="consumer-protection">
+    <h2>13. Maryland Consumer Protection Compliance</h2>
+    <p>NC – Developer, LLC is committed to full compliance with the <strong>Maryland Consumer Protection Act</strong> (Md. Code, Com. Law § 13-101 et seq.) and all related regulations enforced by the Maryland Attorney General's Consumer Protection Division. We prohibit:</p>
+    <ul>
+      <li>Unfair, abusive, or deceptive trade practices in any form</li>
+      <li>False or misleading statements about our services, pricing, or qualifications</li>
+      <li>Any practice that exploits consumers in violation of Maryland law</li>
+    </ul>
+    <p>If you believe we have engaged in an unfair or deceptive practice, you may file a complaint with the <strong>Maryland Attorney General's Consumer Protection Division</strong> at 200 St. Paul Place, Baltimore, MD 21202, or online at <em>marylandattorneygeneral.gov</em>.</p>
+    <p>Additionally, the <strong>Maryland Online Data Privacy Act (MODPA)</strong>, in full enforcement as of April 1, 2026, governs how we collect and process personal data. See our <a href="privacy-policy.html" style="color:#9A7A2E;">Privacy Policy</a> for full details.</p>
+  </section>
+
+  <!-- 14 -->
+  <section class="policy" id="privacy">
+    <h2>14. Privacy</h2>
+    <p>Your use of our Site and services is also governed by our <a href="privacy-policy.html" style="color:#9A7A2E;">Privacy Policy</a>, which is incorporated into these Terms by reference. By agreeing to these Terms, you acknowledge that you have read and understood our Privacy Policy.</p>
+  </section>
+
+  <!-- 15 -->
+  <section class="policy" id="termination">
+    <h2>15. Termination</h2>
+    <p>NC – Developer, LLC may terminate or suspend access to our services at any time, with or without cause, upon reasonable notice. Causes for termination include but are not limited to:</p>
+    <ul>
+      <li>Material breach of these Terms or any project agreement</li>
+      <li>Non-payment of fees owed</li>
+      <li>Conduct that is harmful to NC – Developer, LLC, its clients, or third parties</li>
+      <li>Violation of applicable law</li>
+    </ul>
+    <p>Upon termination, all licenses granted under these Terms will immediately cease. Provisions that by their nature should survive termination — including intellectual property rights, payment obligations, disclaimers, limitations of liability, and governing law — shall survive.</p>
+    <p>Clients may terminate a project engagement as specified in the applicable service agreement. Early termination fees may apply as described in the SOW.</p>
+  </section>
+
+  <!-- 16 -->
+  <section class="policy" id="changes">
+    <h2>16. Changes to These Terms</h2>
+    <p>We reserve the right to modify these Terms at any time. When we make material changes, we will post the updated Terms on this page with a revised effective date and, where appropriate, provide notice via email or a Site notification.</p>
+    <p>Your continued use of our Site or services after the effective date of any modification constitutes your acceptance of the revised Terms. If you do not agree to the modified Terms, you must stop using our Site and services.</p>
+  </section>
+
+  <!-- 17 -->
+  <section class="policy" id="contact">
+    <h2>17. Contact Information</h2>
+    <p>For questions about these Terms of Service, to report a violation, or for general legal inquiries:</p>
+    <ul>
+      <li><strong>Business:</strong> NC – Developer, LLC</li>
+      <li><strong>Location:</strong> Rosedale, Maryland</li>
+      <li><strong>Email:</strong> legal@ncdeveloper.com</li>
+      <li><strong>Dispute Inquiries:</strong> legal@ncdeveloper.com (Subject: "Dispute Resolution Request")</li>
+    </ul>
+    <div class="highlight-box">
+      <p>These Terms of Service were last reviewed and updated on <strong>April 7, 2026</strong>, in accordance with applicable Maryland laws including the Maryland LLC Act, Maryland Consumer Protection Act, and Maryland Online Data Privacy Act (MODPA).</p>
+    </div>
+  </section>
+
+</div>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="footer-inner">
+    <span>NC – Developer, LLC</span>
+    <div class="footer-copy">© 2026 NC – Developer, LLC. All rights reserved. · Rosedale, Maryland</div>
+    <div class="footer-links">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <span class="dot">·</span>
+      <a href="terms-of-service.html">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
