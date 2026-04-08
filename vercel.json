@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "builds": [
-    { "src": "**/*.html", "use": "@vercel/static" },
-    { "src": "**/*.png",  "use": "@vercel/static" },
-    { "src": "**/*.pdf",  "use": "@vercel/static" }
-  ],
   "routes": [
-    { "src": "/(.*)", "dest": "/$1" }
+    { "src": "/api/chat", "dest": "/api/chat.js" },
+    { "src": "/brand_assets/(.*)", "dest": "/brand_assets/$1" },
+    { "src": "/(.*\\.html)", "dest": "/$1" },
+    { "src": "/(.*\\.png)",  "dest": "/$1" },
+    { "src": "/(.*\\.pdf)",  "dest": "/$1" },
+    { "src": "/(.*)",        "dest": "/$1" }
   ]
 }

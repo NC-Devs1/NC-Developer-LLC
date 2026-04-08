@@ -1164,5 +1164,452 @@
 })();
 </script>
 
+<!-- ══════════════════════════════════════════════════════════
+     ORBIT CHAT AGENT
+     ══════════════════════════════════════════════════════════ -->
+<style>
+  /* ── Orbit widget shell ── */
+  #orbit-widget {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 9999;
+    font-family: 'DM Sans', system-ui, sans-serif;
+  }
+
+  /* ── Launcher button ── */
+  #orbit-launcher {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    background: transparent;
+    box-shadow: 0 4px 20px rgba(200,164,74,0.45);
+    transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  #orbit-launcher:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 28px rgba(200,164,74,0.6);
+  }
+  #orbit-launcher img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Pulse ring */
+  #orbit-launcher::before {
+    content: '';
+    position: absolute;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: 2px solid rgba(200,164,74,0.5);
+    animation: orbitPulse 2s ease-out infinite;
+    pointer-events: none;
+  }
+  @keyframes orbitPulse {
+    0%   { transform: scale(1);   opacity: 0.8; }
+    100% { transform: scale(1.5); opacity: 0;   }
+  }
+
+  /* ── Chat panel ── */
+  #orbit-panel {
+    position: absolute;
+    bottom: 76px;
+    right: 0;
+    width: 360px;
+    max-height: 540px;
+    background: #162218;
+    border: 1px solid rgba(200,164,74,0.25);
+    border-radius: 18px;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.55);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform-origin: bottom right;
+    transform: scale(0.85) translateY(12px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.28s cubic-bezier(0.34,1.56,0.64,1), opacity 0.22s ease;
+  }
+  #orbit-panel.open {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Header */
+  #orbit-header {
+    background: linear-gradient(135deg, #1E3028 0%, #162218 100%);
+    border-bottom: 1px solid rgba(200,164,74,0.2);
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  #orbit-header-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(200,164,74,0.4);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  #orbit-header-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  #orbit-header-info { flex: 1; }
+  #orbit-header-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: #E8C96A;
+    font-family: 'Playfair Display', serif;
+    line-height: 1.2;
+  }
+  #orbit-header-status {
+    font-size: 11px;
+    color: #1EBFA0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 2px;
+  }
+  #orbit-header-status::before {
+    content: '';
+    display: inline-block;
+    width: 6px; height: 6px;
+    background: #1EBFA0;
+    border-radius: 50%;
+    animation: orbitBlink 2s ease-in-out infinite;
+  }
+  @keyframes orbitBlink {
+    0%,100% { opacity: 1; } 50% { opacity: 0.4; }
+  }
+  #orbit-close-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #7A9488;
+    font-size: 20px;
+    line-height: 1;
+    padding: 4px;
+    transition: color 0.2s;
+  }
+  #orbit-close-btn:hover { color: #E8C96A; }
+
+  /* Messages */
+  #orbit-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  #orbit-messages::-webkit-scrollbar { width: 4px; }
+  #orbit-messages::-webkit-scrollbar-track { background: transparent; }
+  #orbit-messages::-webkit-scrollbar-thumb { background: rgba(200,164,74,0.2); border-radius: 4px; }
+
+  .orbit-msg {
+    max-width: 82%;
+    padding: 10px 13px;
+    border-radius: 14px;
+    font-size: 13.5px;
+    line-height: 1.5;
+    animation: orbitMsgIn 0.22s ease;
+  }
+  @keyframes orbitMsgIn {
+    from { transform: translateY(6px); opacity: 0; }
+    to   { transform: translateY(0);  opacity: 1; }
+  }
+  .orbit-msg.bot {
+    background: #1E3028;
+    color: #F0EAD6;
+    border-bottom-left-radius: 4px;
+    align-self: flex-start;
+    border: 1px solid rgba(200,164,74,0.12);
+  }
+  .orbit-msg.user {
+    background: linear-gradient(135deg, #C8A44A, #9A7A2E);
+    color: #0B1710;
+    font-weight: 500;
+    border-bottom-right-radius: 4px;
+    align-self: flex-end;
+  }
+
+  /* Typing indicator */
+  .orbit-typing {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 13px;
+    background: #1E3028;
+    border: 1px solid rgba(200,164,74,0.12);
+    border-radius: 14px;
+    border-bottom-left-radius: 4px;
+    align-self: flex-start;
+    animation: orbitMsgIn 0.22s ease;
+  }
+  .orbit-typing span {
+    width: 6px; height: 6px;
+    background: #7A9488;
+    border-radius: 50%;
+    animation: orbitDot 1.2s ease-in-out infinite;
+  }
+  .orbit-typing span:nth-child(2) { animation-delay: 0.2s; }
+  .orbit-typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes orbitDot {
+    0%,80%,100% { transform: scale(0.7); opacity: 0.4; }
+    40%          { transform: scale(1);   opacity: 1;   }
+  }
+
+  /* Input area */
+  #orbit-input-area {
+    padding: 12px 14px;
+    border-top: 1px solid rgba(200,164,74,0.15);
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+    background: #1E3028;
+  }
+  #orbit-input {
+    flex: 1;
+    background: #0B1710;
+    border: 1px solid rgba(200,164,74,0.25);
+    border-radius: 10px;
+    padding: 9px 12px;
+    color: #F0EAD6;
+    font-size: 13.5px;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    resize: none;
+    outline: none;
+    min-height: 38px;
+    max-height: 100px;
+    line-height: 1.45;
+    transition: border-color 0.2s;
+  }
+  #orbit-input::placeholder { color: #7A9488; }
+  #orbit-input:focus { border-color: rgba(200,164,74,0.55); }
+  #orbit-send {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(135deg, #C8A44A, #9A7A2E);
+    color: #0B1710;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  #orbit-send:hover { transform: scale(1.06); }
+  #orbit-send:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+  #orbit-send svg { width: 17px; height: 17px; }
+
+  #orbit-footer-note {
+    text-align: center;
+    font-size: 10px;
+    color: #7A9488;
+    padding: 6px 14px 10px;
+    background: #1E3028;
+  }
+
+  @media (max-width: 420px) {
+    #orbit-widget { bottom: 16px; right: 16px; }
+    #orbit-panel { width: calc(100vw - 32px); right: 0; }
+  }
+</style>
+
+<div id="orbit-widget">
+  <!-- Chat panel -->
+  <div id="orbit-panel" role="dialog" aria-label="Orbit Chat" aria-modal="true">
+    <div id="orbit-header">
+      <div id="orbit-header-icon">
+        <img src="brand_assets/Orbit Icon.png" alt="Orbit" />
+      </div>
+      <div id="orbit-header-info">
+        <div id="orbit-header-name">Orbit</div>
+        <div id="orbit-header-status">Online — Available 24/7</div>
+      </div>
+      <button type="button" id="orbit-close-btn" aria-label="Close chat">&#x2715;</button>
+    </div>
+
+    <div id="orbit-messages" aria-live="polite"></div>
+
+    <div id="orbit-input-area">
+      <textarea
+        id="orbit-input"
+        placeholder="Ask me anything…"
+        rows="1"
+        aria-label="Chat message"
+      ></textarea>
+      <button type="button" id="orbit-send" aria-label="Send">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
+    </div>
+    <div id="orbit-footer-note">Powered by Orbit · NC – Developer, LLC</div>
+  </div>
+
+  <!-- Launcher -->
+  <button type="button" id="orbit-launcher" aria-label="Open Orbit chat" aria-expanded="false">
+    <img src="brand_assets/Orbit Icon.png" alt="Orbit" />
+  </button>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── Config ── */
+  const CHAT_API = '/api/chat';
+
+  /* ── State ── */
+  const history = [];
+  let isOpen    = false;
+  let isBusy    = false;
+
+  /* ── Elements ── */
+  const launcher  = document.getElementById('orbit-launcher');
+  const panel     = document.getElementById('orbit-panel');
+  const closeBtn  = document.getElementById('orbit-close-btn');
+  const messages  = document.getElementById('orbit-messages');
+  const input     = document.getElementById('orbit-input');
+  const sendBtn   = document.getElementById('orbit-send');
+
+  /* ── Toggle panel ── */
+  function togglePanel() {
+    isOpen = !isOpen;
+    panel.classList.toggle('open', isOpen);
+    launcher.setAttribute('aria-expanded', String(isOpen));
+    if (isOpen) {
+      if (messages.childElementCount === 0) addBotMessage(
+        "Hey there! 👋 I'm Orbit, your 24/7 assistant for NC – Developer, LLC. Whether you're curious about our services, have questions about working with us, or just want to learn more — I'm here! What can I help you with today?"
+      );
+      setTimeout(() => input.focus(), 280);
+    }
+  }
+
+  launcher.addEventListener('click', togglePanel);
+  closeBtn.addEventListener('click', togglePanel);
+
+  /* ── Close on outside click ── */
+  document.addEventListener('click', (e) => {
+    if (isOpen && !panel.contains(e.target) && !launcher.contains(e.target)) togglePanel();
+  });
+
+  /* ── Add messages ── */
+  function addBotMessage(text) {
+    const el = document.createElement('div');
+    el.className = 'orbit-msg bot';
+    el.textContent = text;
+    messages.appendChild(el);
+    scrollBottom();
+  }
+
+  function addUserMessage(text) {
+    const el = document.createElement('div');
+    el.className = 'orbit-msg user';
+    el.textContent = text;
+    messages.appendChild(el);
+    scrollBottom();
+  }
+
+  function showTyping() {
+    const el = document.createElement('div');
+    el.className = 'orbit-typing';
+    el.id = 'orbit-typing-indicator';
+    el.innerHTML = '<span></span><span></span><span></span>';
+    messages.appendChild(el);
+    scrollBottom();
+    return el;
+  }
+
+  function removeTyping() {
+    const el = document.getElementById('orbit-typing-indicator');
+    if (el) el.remove();
+  }
+
+  function scrollBottom() {
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  /* ── Send message ── */
+  async function sendMessage() {
+    const text = input.value.trim();
+    if (!text || isBusy) return;
+
+    isBusy = true;
+    sendBtn.disabled = true;
+    input.value = '';
+    autoResize();
+
+    addUserMessage(text);
+    history.push({ role: 'user', content: text });
+
+    showTyping();
+
+    try {
+      const res = await fetch(CHAT_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: history }),
+      });
+
+      if (!res.ok) throw new Error('API error ' + res.status);
+
+      const data = await res.json();
+      const reply = data.reply ||
+        "Hmm, I had a little hiccup there. Try again or reach us at support@nc-devs.com!";
+
+      removeTyping();
+      history.push({ role: 'assistant', content: reply });
+      addBotMessage(reply);
+
+    } catch (err) {
+      removeTyping();
+      addBotMessage("Oops — something went wrong on my end! You can reach our team directly at support@nc-devs.com and we'll get back to you quickly. 🙏");
+      console.warn('Orbit error:', err);
+    }
+
+    isBusy = false;
+    sendBtn.disabled = false;
+    input.focus();
+  }
+
+  /* ── Input auto-resize & keyboard ── */
+  function autoResize() {
+    input.style.height = 'auto';
+    input.style.height = Math.min(input.scrollHeight, 100) + 'px';
+  }
+
+  input.addEventListener('input', autoResize);
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+  });
+  sendBtn.addEventListener('click', sendMessage);
+
+  /* ── Escape to close ── */
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isOpen) togglePanel();
+  });
+})();
+</script>
+
 </body>
 </html>
