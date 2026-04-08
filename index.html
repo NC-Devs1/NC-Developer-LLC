@@ -374,10 +374,11 @@
 
     <!-- Desktop links -->
     <div style="display:flex; align-items:center; gap:36px;" class="hidden md:flex">
-      <a href="#about"    class="nav-link">About</a>
-      <a href="#services" class="nav-link">Services</a>
-      <a href="#projects" class="nav-link">Projects</a>
-      <a href="#contact"  class="nav-link">Contact</a>
+      <a href="#about"         class="nav-link">About</a>
+      <a href="#services"      class="nav-link">Services</a>
+      <a href="#projects"      class="nav-link">Projects</a>
+      <a href="#testimonials"  class="nav-link">Reviews</a>
+      <a href="#contact"       class="nav-link">Contact</a>
     </div>
 
     <!-- Desktop CTA -->
@@ -402,10 +403,11 @@
       <img src="brand_assets/%20NC-Devs%20logo.png" alt="NC Developer" style="width:36px;height:36px;object-fit:contain;" onerror="this.style.display='none'" />
       <span class="shimmer-gold" style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;">NC – Developer, LLC</span>
     </div>
-    <a href="#about"    onclick="closeNav()" class="nav-link" style="padding:12px 0; display:block;">About</a>
-    <a href="#services" onclick="closeNav()" class="nav-link" style="padding:12px 0; display:block;">Services</a>
-    <a href="#projects" onclick="closeNav()" class="nav-link" style="padding:12px 0; display:block;">Projects</a>
-    <a href="#contact"  onclick="closeNav()" class="nav-link" style="padding:12px 0; display:block;">Contact</a>
+    <a href="#about"        onclick="closeNav()" class="nav-link" style="padding:12px 0; display:block;">About</a>
+    <a href="#services"     onclick="closeNav()" class="nav-link" style="padding:12px 0; display:block;">Services</a>
+    <a href="#projects"     onclick="closeNav()" class="nav-link" style="padding:12px 0; display:block;">Projects</a>
+    <a href="#testimonials" onclick="closeNav()" class="nav-link" style="padding:12px 0; display:block;">Reviews</a>
+    <a href="#contact"      onclick="closeNav()" class="nav-link" style="padding:12px 0; display:block;">Contact</a>
     <a href="https://calendar.app.google/65VzGAMNNQKNzReF8" target="_blank" rel="noopener" class="btn-gold" style="margin-top:12px;justify-content:center;">Book a Call</a>
   </div>
 </nav>
@@ -785,6 +787,122 @@
 </section>
 
 
+<!-- ━━━━━━━━━━━━━━━━━━ TESTIMONIALS ━━━━━━━━━━━━━━━━━━ -->
+<section id="testimonials" class="grain" style="padding:100px 0;background:#F0E6D8;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(200,164,74,0.06),transparent 70%);pointer-events:none;"></div>
+
+  <div style="max-width:1280px;margin:0 auto;padding:0 28px;position:relative;z-index:2;">
+
+    <!-- Header -->
+    <div class="reveal" style="text-align:center;margin-bottom:64px;">
+      <div class="section-tag" style="justify-content:center;margin-bottom:20px;">Client Reviews</div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(34px,5vw,58px);font-weight:900;letter-spacing:-0.03em;color:#2C1A0E;line-height:1.1;margin-bottom:18px;">
+        What Our <span style="font-family:'Dancing Script',cursive;font-size:1.1em;background:linear-gradient(95deg,#C8A44A 20%,#1EBFA0 80%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Clients Say</span>
+      </h2>
+      <p style="font-size:16px;color:#A07858;max-width:480px;margin:0 auto;line-height:1.72;">Real experiences from the people we've had the privilege of building with.</p>
+    </div>
+
+    <!-- Testimonial cards -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-bottom:72px;">
+
+      <div class="reveal" style="background:rgba(253,243,236,0.85);border:1px solid rgba(200,164,74,0.18);border-radius:16px;padding:36px;backdrop-filter:blur(4px);">
+        <div style="color:#C8A44A;font-size:22px;letter-spacing:3px;margin-bottom:18px;">★★★★★</div>
+        <p style="font-size:15px;line-height:1.82;color:#6B4F38;margin-bottom:24px;font-style:italic;">"Working with NC Developer was seamless from start to finish. They took our idea and turned it into a polished, professional app that exceeded every expectation."</p>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#C8A44A,#E8C96A);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;color:#2C1A0E;font-size:15px;">M</div>
+          <div>
+            <div style="font-size:14px;font-weight:600;color:#2C1A0E;">Marcus T.</div>
+            <div style="font-size:12px;color:#A07858;">Startup Founder</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal" style="background:rgba(253,243,236,0.85);border:1px solid rgba(30,191,160,0.18);border-radius:16px;padding:36px;backdrop-filter:blur(4px);">
+        <div style="color:#C8A44A;font-size:22px;letter-spacing:3px;margin-bottom:18px;">★★★★★</div>
+        <p style="font-size:15px;line-height:1.82;color:#6B4F38;margin-bottom:24px;font-style:italic;">"Professional, creative, and incredibly detail-oriented. The team genuinely cared about getting our product right. I can't recommend them enough."</p>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#1EBFA0,#4EDBC5);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:15px;">P</div>
+          <div>
+            <div style="font-size:14px;font-weight:600;color:#2C1A0E;">Priya S.</div>
+            <div style="font-size:12px;color:#A07858;">Product Manager</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal" style="background:rgba(253,243,236,0.85);border:1px solid rgba(181,212,41,0.15);border-radius:16px;padding:36px;backdrop-filter:blur(4px);">
+        <div style="color:#C8A44A;font-size:22px;letter-spacing:3px;margin-bottom:18px;">★★★★★</div>
+        <p style="font-size:15px;line-height:1.82;color:#6B4F38;margin-bottom:24px;font-style:italic;">"From concept to launch faster than I imagined. NC Developer brought both technical excellence and creative vision to every stage of the project."</p>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#B5D429,#D4F04A);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;color:#2C1A0E;font-size:15px;">J</div>
+          <div>
+            <div style="font-size:14px;font-weight:600;color:#2C1A0E;">James R.</div>
+            <div style="font-size:12px;color:#A07858;">Business Owner</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Leave a Review Form -->
+    <div class="reveal" style="max-width:680px;margin:0 auto;">
+      <div style="text-align:center;margin-bottom:36px;">
+        <div class="section-tag" style="justify-content:center;margin-bottom:16px;">Share Your Experience</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:clamp(24px,3.5vw,36px);font-weight:800;color:#2C1A0E;margin-bottom:10px;">Leave a Review</h3>
+        <p style="font-size:15px;color:#A07858;line-height:1.7;">We'd love to hear about your experience working with us.</p>
+      </div>
+
+      <style>
+        .review-input {
+          width:100%;box-sizing:border-box;background:rgba(253,243,236,0.9);border:1px solid rgba(200,164,74,0.22);
+          border-radius:10px;padding:13px 16px;font-size:14px;color:#2C1A0E;outline:none;
+          transition:border-color 0.25s,box-shadow 0.25s;font-family:inherit;
+        }
+        .review-input::placeholder { color:#B89070; }
+        .review-input:focus { border-color:rgba(200,164,74,0.6);box-shadow:0 0 0 3px rgba(200,164,74,0.1); }
+        .star-rating { display:flex;flex-direction:row-reverse;gap:6px;justify-content:center;margin-bottom:4px; }
+        .star-rating input { display:none; }
+        .star-rating label { font-size:32px;color:#D4C5A9;cursor:pointer;transition:color 0.15s;line-height:1; }
+        .star-rating input:checked ~ label,
+        .star-rating label:hover,
+        .star-rating label:hover ~ label { color:#C8A44A; }
+      </style>
+
+      <form action="https://formsubmit.co/support@nc-devs.com" method="POST" style="display:flex;flex-direction:column;gap:16px;">
+        <input type="hidden" name="_subject" value="New Client Review – NC Developer LLC">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://nc-devs.com/#testimonials">
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <input class="review-input" type="text" name="name" placeholder="Your Name" required>
+          <input class="review-input" type="email" name="email" placeholder="Email Address" required>
+        </div>
+        <input class="review-input" type="text" name="company" placeholder="Company / Project (optional)">
+
+        <div style="background:rgba(253,243,236,0.9);border:1px solid rgba(200,164,74,0.22);border-radius:10px;padding:18px 16px;text-align:center;">
+          <div style="font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#A07858;margin-bottom:10px;">Your Rating</div>
+          <div class="star-rating">
+            <input type="radio" id="s5" name="rating" value="5 Stars"><label for="s5">★</label>
+            <input type="radio" id="s4" name="rating" value="4 Stars"><label for="s4">★</label>
+            <input type="radio" id="s3" name="rating" value="3 Stars"><label for="s3">★</label>
+            <input type="radio" id="s2" name="rating" value="2 Stars"><label for="s2">★</label>
+            <input type="radio" id="s1" name="rating" value="1 Star"><label for="s1">★</label>
+          </div>
+        </div>
+
+        <textarea class="review-input" name="review" placeholder="Tell us about your experience working with NC Developer…" rows="5" required style="resize:vertical;min-height:110px;"></textarea>
+
+        <button type="submit" class="btn-gold" style="padding:14px 32px;font-size:15px;justify-content:center;">
+          Submit Review
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 7.5h11M8.5 3l4.5 4.5L8.5 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+
 <!-- ━━━━━━━━━━━━━━━━━━ CTA SECTION ━━━━━━━━━━━━━━━━━━ -->
 <section id="contact" class="grain" style="padding:120px 0;background:#F7E8DA;position:relative;overflow:hidden;">
   <div style="position:absolute;inset:0;background:radial-gradient(ellipse 65% 55% at 50% 50%,rgba(200,164,74,0.07),transparent 70%);pointer-events:none;"></div>
@@ -806,6 +924,36 @@
         Book a Free Consultation
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h12M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
+
+      <!-- Contact / Inquiry Form -->
+      <div class="reveal" style="background:rgba(255,248,241,0.7);border:1px solid rgba(200,164,74,0.2);border-radius:18px;padding:40px 36px;margin-bottom:60px;text-align:left;">
+        <div style="text-align:center;margin-bottom:28px;">
+          <div style="font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#C8A44A;margin-bottom:10px;">Send a Message</div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#2C1A0E;margin:0;">Get in Touch Directly</h3>
+        </div>
+        <form action="https://formsubmit.co/support@nc-devs.com" method="POST" style="display:flex;flex-direction:column;gap:14px;">
+          <input type="hidden" name="_subject" value="New Inquiry – NC Developer LLC">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_next" value="https://nc-devs.com/#contact">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <input class="review-input" type="text" name="name" placeholder="Your Name" required>
+            <input class="review-input" type="email" name="email" placeholder="Email Address" required>
+          </div>
+          <select class="review-input" name="service" aria-label="Service Interest" title="Service Interest" style="cursor:pointer;appearance:none;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23A07858' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E\");background-repeat:no-repeat;background-position:right 14px center;">
+            <option value="" disabled selected>What can we help with?</option>
+            <option>Mobile App Development</option>
+            <option>Web Application Development</option>
+            <option>Digital Product Strategy</option>
+            <option>Other</option>
+          </select>
+          <textarea class="review-input" name="message" placeholder="Tell us about your project or idea…" rows="4" required style="resize:vertical;min-height:100px;"></textarea>
+          <button type="submit" class="btn-gold" style="padding:14px 32px;font-size:15px;justify-content:center;">
+            Send Message
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 7.5h11M8.5 3l4.5 4.5L8.5 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </form>
+      </div>
     </div>
 
     <!-- Social + Location -->
