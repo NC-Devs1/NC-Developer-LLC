@@ -802,45 +802,10 @@
       <p style="font-size:16px;color:#A07858;max-width:480px;margin:0 auto;line-height:1.72;">Real experiences from the people we've had the privilege of building with.</p>
     </div>
 
-    <!-- Testimonial cards -->
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-bottom:72px;">
-
-      <div class="reveal" style="background:rgba(253,243,236,0.85);border:1px solid rgba(200,164,74,0.18);border-radius:16px;padding:36px;backdrop-filter:blur(4px);">
-        <div style="color:#C8A44A;font-size:22px;letter-spacing:3px;margin-bottom:18px;">★★★★★</div>
-        <p style="font-size:15px;line-height:1.82;color:#6B4F38;margin-bottom:24px;font-style:italic;">"Working with NC Developer was seamless from start to finish. They took our idea and turned it into a polished, professional app that exceeded every expectation."</p>
-        <div style="display:flex;align-items:center;gap:12px;">
-          <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#C8A44A,#E8C96A);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;color:#2C1A0E;font-size:15px;">M</div>
-          <div>
-            <div style="font-size:14px;font-weight:600;color:#2C1A0E;">Marcus T.</div>
-            <div style="font-size:12px;color:#A07858;">Startup Founder</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="reveal" style="background:rgba(253,243,236,0.85);border:1px solid rgba(30,191,160,0.18);border-radius:16px;padding:36px;backdrop-filter:blur(4px);">
-        <div style="color:#C8A44A;font-size:22px;letter-spacing:3px;margin-bottom:18px;">★★★★★</div>
-        <p style="font-size:15px;line-height:1.82;color:#6B4F38;margin-bottom:24px;font-style:italic;">"Professional, creative, and incredibly detail-oriented. The team genuinely cared about getting our product right. I can't recommend them enough."</p>
-        <div style="display:flex;align-items:center;gap:12px;">
-          <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#1EBFA0,#4EDBC5);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:15px;">P</div>
-          <div>
-            <div style="font-size:14px;font-weight:600;color:#2C1A0E;">Priya S.</div>
-            <div style="font-size:12px;color:#A07858;">Product Manager</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="reveal" style="background:rgba(253,243,236,0.85);border:1px solid rgba(181,212,41,0.15);border-radius:16px;padding:36px;backdrop-filter:blur(4px);">
-        <div style="color:#C8A44A;font-size:22px;letter-spacing:3px;margin-bottom:18px;">★★★★★</div>
-        <p style="font-size:15px;line-height:1.82;color:#6B4F38;margin-bottom:24px;font-style:italic;">"From concept to launch faster than I imagined. NC Developer brought both technical excellence and creative vision to every stage of the project."</p>
-        <div style="display:flex;align-items:center;gap:12px;">
-          <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#B5D429,#D4F04A);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;color:#2C1A0E;font-size:15px;">J</div>
-          <div>
-            <div style="font-size:14px;font-weight:600;color:#2C1A0E;">James R.</div>
-            <div style="font-size:12px;color:#A07858;">Business Owner</div>
-          </div>
-        </div>
-      </div>
-
+    <!-- Testimonial cards — populated from reviews.json -->
+    <div id="reviews-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-bottom:72px;">
+      <!-- Loading placeholder -->
+      <div style="grid-column:1/-1;text-align:center;padding:40px;color:#B89070;font-size:14px;">Loading reviews…</div>
     </div>
 
     <!-- Leave a Review Form -->
@@ -867,12 +832,9 @@
         .star-rating label:hover ~ label { color:#C8A44A; }
       </style>
 
-      <form action="https://formsubmit.co/support@nc-devs.com" method="POST" style="display:flex;flex-direction:column;gap:16px;">
-        <input type="hidden" name="_subject" value="New Client Review – NC Developer LLC">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_next" value="https://nc-devs.com/#testimonials">
+      <div id="review-form-msg" style="display:none;padding:14px 18px;border-radius:10px;font-size:14px;margin-bottom:8px;"></div>
 
+      <form id="review-form" style="display:flex;flex-direction:column;gap:16px;">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
           <input class="review-input" type="text" name="name" placeholder="Your Name" required>
           <input class="review-input" type="email" name="email" placeholder="Email Address" required>
@@ -892,7 +854,7 @@
 
         <textarea class="review-input" name="review" placeholder="Tell us about your experience working with NC Developer…" rows="5" required style="resize:vertical;min-height:110px;"></textarea>
 
-        <button type="submit" class="btn-gold" style="padding:14px 32px;font-size:15px;justify-content:center;">
+        <button type="submit" id="review-submit-btn" class="btn-gold" style="padding:14px 32px;font-size:15px;justify-content:center;">
           Submit Review
           <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 7.5h11M8.5 3l4.5 4.5L8.5 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
@@ -1756,6 +1718,104 @@
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && isOpen) togglePanel();
   });
+})();
+</script>
+
+
+<!-- ━━━━━━━━━━━━━━━━━━ REVIEWS ━━━━━━━━━━━━━━━━━━ -->
+<script>
+(function () {
+  const COLOR_MAP = {
+    gold: { border:'rgba(200,164,74,0.18)', bg:'linear-gradient(135deg,#C8A44A,#E8C96A)', text:'#2C1A0E' },
+    teal: { border:'rgba(30,191,160,0.18)',  bg:'linear-gradient(135deg,#1EBFA0,#4EDBC5)', text:'#fff'    },
+    lime: { border:'rgba(181,212,41,0.15)',  bg:'linear-gradient(135deg,#B5D429,#D4F04A)', text:'#2C1A0E' },
+  };
+
+  function starsHtml(rating) {
+    const n = Math.min(parseInt(rating) || 5, 5);
+    return '★'.repeat(n) + '<span style="opacity:0.25;">★</span>'.repeat(5 - n);
+  }
+
+  function renderReviews(reviews) {
+    const grid = document.getElementById('reviews-grid');
+    if (!grid) return;
+    if (!reviews.length) {
+      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:#B89070;font-size:14px;">No reviews yet — be the first!</div>';
+      return;
+    }
+    grid.innerHTML = reviews.map(r => {
+      const c = COLOR_MAP[r.color] || COLOR_MAP.gold;
+      return `
+        <div style="background:rgba(253,243,236,0.85);border:1px solid ${c.border};border-radius:16px;padding:36px;backdrop-filter:blur(4px);">
+          <div style="color:#C8A44A;font-size:22px;letter-spacing:3px;margin-bottom:18px;">${starsHtml(r.rating)}</div>
+          <p style="font-size:15px;line-height:1.82;color:#6B4F38;margin-bottom:24px;font-style:italic;">"${r.review.replace(/</g,'&lt;')}"</p>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:40px;height:40px;border-radius:50%;background:${c.bg};display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;color:${c.text};font-size:15px;flex-shrink:0;">${r.initial}</div>
+            <div>
+              <div style="font-size:14px;font-weight:600;color:#2C1A0E;">${r.name.replace(/</g,'&lt;')}</div>
+              <div style="font-size:12px;color:#A07858;">${(r.company||'').replace(/</g,'&lt;')}</div>
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  async function loadReviews() {
+    try {
+      const res = await fetch('/reviews.json?v=' + Date.now());
+      if (!res.ok) throw new Error('fetch failed');
+      renderReviews(await res.json());
+    } catch {
+      const grid = document.getElementById('reviews-grid');
+      if (grid) grid.innerHTML = '';
+    }
+  }
+
+  loadReviews();
+
+  /* ── Review form submission ── */
+  const form    = document.getElementById('review-form');
+  const msgBox  = document.getElementById('review-form-msg');
+  const submitBtn = document.getElementById('review-submit-btn');
+
+  function showMsg(text, ok) {
+    msgBox.innerHTML = text;
+    msgBox.style.display  = 'block';
+    msgBox.style.background = ok ? 'rgba(30,191,160,0.12)' : 'rgba(232,80,64,0.10)';
+    msgBox.style.border   = ok ? '1px solid rgba(30,191,160,0.3)' : '1px solid rgba(232,80,64,0.3)';
+    msgBox.style.color    = ok ? '#0F8F76' : '#C0392B';
+  }
+
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      if (!fd.get('rating')) { showMsg('Please select a star rating.', false); return; }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting…';
+      msgBox.style.display = 'none';
+
+      try {
+        const res = await fetch('/api/review-submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(Object.fromEntries(fd)),
+        });
+        if (!res.ok) {
+          const d = await res.json().catch(() => ({}));
+          throw new Error(d.error || 'Submission failed');
+        }
+        form.reset();
+        showMsg('🌟 Thank you! Your review has been submitted and is pending approval.', true);
+      } catch (err) {
+        showMsg('Something went wrong: ' + err.message + '. You can also email us at support@nc-devs.com.', false);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Submit Review <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 7.5h11M8.5 3l4.5 4.5L8.5 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      }
+    });
+  }
 })();
 </script>
 

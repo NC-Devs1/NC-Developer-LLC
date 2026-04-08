@@ -8,6 +8,7 @@
     "screenshot": "node screenshot.mjs"
   },
   "dependencies": {
+    "nodemailer": "^8.0.5",
     "puppeteer": "^24.15.0"
   },
   "devDependencies": {}

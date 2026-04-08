@@ -1,0 +1,32 @@
+[
+  {
+    "id": "placeholder-1",
+    "name": "Marcus T.",
+    "company": "Startup Founder",
+    "rating": "5 Stars",
+    "review": "Working with NC Developer was seamless from start to finish. They took our idea and turned it into a polished, professional app that exceeded every expectation.",
+    "date": "2026-03-15",
+    "initial": "M",
+    "color": "gold"
+  },
+  {
+    "id": "placeholder-2",
+    "name": "Priya S.",
+    "company": "Product Manager",
+    "rating": "5 Stars",
+    "review": "Professional, creative, and incredibly detail-oriented. The team genuinely cared about getting our product right. I can't recommend them enough.",
+    "date": "2026-03-20",
+    "initial": "P",
+    "color": "teal"
+  },
+  {
+    "id": "placeholder-3",
+    "name": "James R.",
+    "company": "Business Owner",
+    "rating": "5 Stars",
+    "review": "From concept to launch faster than I imagined. NC Developer brought both technical excellence and creative vision to every stage of the project.",
+    "date": "2026-03-28",
+    "initial": "J",
+    "color": "lime"
+  }
+]
