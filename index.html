@@ -253,11 +253,11 @@
       #desktop-nav-links { display: none !important; }
       #desktop-cta       { display: none !important; }
 
-      /* Mobile dropdown full-width, no overflow */
+      /* Mobile dropdown — full width, clears the flex row */
       #mobile-nav {
+        position: relative !important;
         width: 100% !important;
         box-sizing: border-box !important;
-        overflow: hidden !important;
       }
 
       #about    { padding: 64px 0 !important; }
@@ -410,16 +410,17 @@
       <span style="display:block;width:22px;height:1.5px;background:currentColor;transition:transform 0.25s,opacity 0.25s;" id="hb1"></span>
       <span style="display:block;width:22px;height:1.5px;background:currentColor;transition:opacity 0.25s;" id="hb2"></span>
       <span style="display:block;width:22px;height:1.5px;background:currentColor;transition:transform 0.25s;" id="hb3"></span>
-    </button>
-  </div>
+      </button>
+    </div><!-- /mobile wrapper (Book a Call + hamburger) -->
+  </div><!-- /inner nav row (max-width container) -->
 
-  <!-- Mobile menu -->
-  <div id="mobile-nav" style="display:none; flex-direction:column; gap:2px; padding:12px 28px 20px; border-top:1px solid rgba(200,164,74,0.18); background:rgba(253,243,236,0.98);">
-    <a href="#about"        onclick="closeNav()" class="nav-link" style="padding:12px 0; display:block;">About</a>
-    <a href="#services"     onclick="closeNav()" class="nav-link" style="padding:12px 0; display:block;">Services</a>
-    <a href="#projects"     onclick="closeNav()" class="nav-link" style="padding:12px 0; display:block;">Projects</a>
-    <a href="#testimonials" onclick="closeNav()" class="nav-link" style="padding:12px 0; display:block;">Reviews</a>
-    <a href="#contact"      onclick="closeNav()" class="nav-link" style="padding:12px 0; display:block;">Contact</a>
+  <!-- Mobile menu — sits OUTSIDE the flex row so it drops below properly -->
+  <div id="mobile-nav" style="display:none; flex-direction:column; gap:2px; padding:12px 28px 20px; border-top:1px solid rgba(200,164,74,0.18); background:rgba(253,243,236,0.98); width:100%; box-sizing:border-box;">
+    <a href="#about"        onclick="closeNav()" class="nav-link" style="padding:14px 0; display:block; font-size:16px;">About</a>
+    <a href="#services"     onclick="closeNav()" class="nav-link" style="padding:14px 0; display:block; font-size:16px;">Services</a>
+    <a href="#projects"     onclick="closeNav()" class="nav-link" style="padding:14px 0; display:block; font-size:16px;">Projects</a>
+    <a href="#testimonials" onclick="closeNav()" class="nav-link" style="padding:14px 0; display:block; font-size:16px;">Reviews</a>
+    <a href="#contact"      onclick="closeNav()" class="nav-link" style="padding:14px 0; display:block; font-size:16px;">Contact</a>
   </div>
 </nav>
 
