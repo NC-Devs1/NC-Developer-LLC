@@ -373,7 +373,7 @@
     </a>
 
     <!-- Desktop links -->
-    <div style="display:flex; align-items:center; gap:36px;" class="hidden md:flex">
+    <div style="align-items:center; gap:36px;" class="hidden md:flex">
       <a href="#about"         class="nav-link">About</a>
       <a href="#services"      class="nav-link">Services</a>
       <a href="#projects"      class="nav-link">Projects</a>
@@ -387,10 +387,15 @@
       <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1.5 6.5h10M7 2l4.5 4.5L7 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
 
-    <!-- Mobile hamburger -->
-    <button id="hamburger" onclick="toggleNav()" aria-label="Toggle navigation menu" style="
-      display:none; flex-direction:column; gap:5px; padding:8px; background:none; border:none; cursor:pointer; color:#2C1A0E;
-    " class="md:hidden !flex">
+    <!-- Mobile: Book a Call + hamburger -->
+    <div class="flex md:hidden" style="align-items:center; gap:10px;">
+      <a href="https://calendar.app.google/65VzGAMNNQKNzReF8" target="_blank" rel="noopener noreferrer" class="btn-gold" style="padding:8px 14px;font-size:12px;white-space:nowrap;">
+        Book a Call
+        <svg width="11" height="11" viewBox="0 0 13 13" fill="none"><path d="M1.5 6.5h10M7 2l4.5 4.5L7 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <button id="hamburger" type="button" onclick="toggleNav()" aria-label="Toggle navigation menu" style="
+        flex-direction:column; gap:5px; padding:8px; background:none; border:none; cursor:pointer; color:#2C1A0E; display:flex;
+      ">
       <span style="display:block;width:22px;height:1.5px;background:currentColor;transition:transform 0.25s,opacity 0.25s;" id="hb1"></span>
       <span style="display:block;width:22px;height:1.5px;background:currentColor;transition:opacity 0.25s;" id="hb2"></span>
       <span style="display:block;width:22px;height:1.5px;background:currentColor;transition:transform 0.25s;" id="hb3"></span>
@@ -398,17 +403,12 @@
   </div>
 
   <!-- Mobile menu -->
-  <div id="mobile-nav" style="display:none; flex-direction:column; gap:2px; padding:16px 28px 24px; border-top:1px solid rgba(200,164,74,0.18); background:rgba(253,243,236,0.98);">
-    <div style="display:flex;align-items:center;gap:12px;padding:8px 0 16px;border-bottom:1px solid rgba(200,164,74,0.15);margin-bottom:8px;">
-      <img src="brand_assets/%20NC-Devs%20logo.png" alt="NC Developer" style="width:36px;height:36px;object-fit:contain;" onerror="this.style.display='none'" />
-      <span class="shimmer-gold" style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;">NC – Developer, LLC</span>
-    </div>
+  <div id="mobile-nav" style="display:none; flex-direction:column; gap:2px; padding:12px 28px 20px; border-top:1px solid rgba(200,164,74,0.18); background:rgba(253,243,236,0.98);">
     <a href="#about"        onclick="closeNav()" class="nav-link" style="padding:12px 0; display:block;">About</a>
     <a href="#services"     onclick="closeNav()" class="nav-link" style="padding:12px 0; display:block;">Services</a>
     <a href="#projects"     onclick="closeNav()" class="nav-link" style="padding:12px 0; display:block;">Projects</a>
     <a href="#testimonials" onclick="closeNav()" class="nav-link" style="padding:12px 0; display:block;">Reviews</a>
     <a href="#contact"      onclick="closeNav()" class="nav-link" style="padding:12px 0; display:block;">Contact</a>
-    <a href="https://calendar.app.google/65VzGAMNNQKNzReF8" target="_blank" rel="noopener" class="btn-gold" style="margin-top:12px;justify-content:center;">Book a Call</a>
   </div>
 </nav>
 
