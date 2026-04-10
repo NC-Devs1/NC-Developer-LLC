@@ -1594,8 +1594,9 @@
   </button>
 </div>
 
-<script>
-(function () {
+<script type="module">
+  import { getOrbitResponse } from './orbit-handler.js';
+
   'use strict';
 
   /* ── Config ── */
@@ -1686,6 +1687,19 @@
 
     showTyping();
 
+    /* ── 1. Try keyword match first (instant, no API needed) ── */
+    const localReply = getOrbitResponse(text);
+    if (localReply) {
+      removeTyping();
+      history.push({ role: 'assistant', content: localReply });
+      addBotMessage(localReply);
+      isBusy = false;
+      sendBtn.disabled = false;
+      input.focus();
+      return;
+    }
+
+    /* ── 2. Fall back to OpenAI API for anything unrecognized ── */
     try {
       const res = await fetch(CHAT_API, {
         method: 'POST',
@@ -1730,7 +1744,6 @@
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && isOpen) togglePanel();
   });
-})();
 </script>
 
 
