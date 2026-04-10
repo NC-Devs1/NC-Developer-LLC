@@ -249,6 +249,17 @@
 
     /* Mobile + Tablet ≤ 767px */
     @media (max-width: 767px) {
+      /* Force-hide desktop nav elements */
+      #desktop-nav-links { display: none !important; }
+      #desktop-cta       { display: none !important; }
+
+      /* Mobile dropdown full-width, no overflow */
+      #mobile-nav {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+      }
+
       #about    { padding: 64px 0 !important; }
       #services { padding: 64px 0 !important; }
       #projects { padding: 64px 0 !important; }
@@ -373,7 +384,7 @@
     </a>
 
     <!-- Desktop links -->
-    <div style="align-items:center; gap:36px;" class="hidden md:flex">
+    <div id="desktop-nav-links" style="align-items:center; gap:36px;" class="hidden md:flex">
       <a href="#about"         class="nav-link">About</a>
       <a href="#services"      class="nav-link">Services</a>
       <a href="#projects"      class="nav-link">Projects</a>
@@ -382,7 +393,7 @@
     </div>
 
     <!-- Desktop CTA -->
-    <a href="https://calendar.app.google/65VzGAMNNQKNzReF8" target="_blank" rel="noopener noreferrer" class="btn-gold hidden md:inline-flex" style="padding:10px 22px;font-size:13px;">
+    <a id="desktop-cta" href="https://calendar.app.google/65VzGAMNNQKNzReF8" target="_blank" rel="noopener noreferrer" class="btn-gold hidden md:inline-flex" style="padding:10px 22px;font-size:13px;">
       Book a Call
       <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1.5 6.5h10M7 2l4.5 4.5L7 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
