@@ -1636,11 +1636,33 @@
     if (isOpen && !panel.contains(e.target) && !launcher.contains(e.target)) togglePanel();
   });
 
+  /* ── Format bot message: escape HTML, linkify URLs and emails, newlines → <br> ── */
+  function formatBotMessage(text) {
+    // 1. Escape HTML to prevent XSS
+    const escaped = text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+    // 2. Convert https URLs to clickable links
+    const linked = escaped.replace(
+      /(https?:\/\/[^\s]+)/g,
+      '<a href="$1" target="_blank" rel="noopener noreferrer" style="color:#C8A44A;text-decoration:underline;word-break:break-all;">Book a Free Call &rarr;</a>'
+    );
+    // 3. Convert email addresses to mailto links
+    const emailed = linked.replace(
+      /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g,
+      '<a href="mailto:$1" style="color:#C8A44A;text-decoration:underline;">$1</a>'
+    );
+    // 4. Convert newlines to <br>
+    return emailed.replace(/\n/g, '<br>');
+  }
+
   /* ── Add messages ── */
   function addBotMessage(text) {
     const el = document.createElement('div');
     el.className = 'orbit-msg bot';
-    el.textContent = text;
+    el.innerHTML = formatBotMessage(text);
     messages.appendChild(el);
     scrollBottom();
   }
