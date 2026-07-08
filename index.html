@@ -450,6 +450,11 @@
     }
   }
 </style>
+<!-- Vercel Speed Insights -->
+<script type="module">
+  import { injectSpeedInsights } from '/_vercel/speed-insights/script.js';
+  injectSpeedInsights();
+</script>
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -984,7 +989,7 @@
 (function initSpiral() {
   if (typeof gsap === 'undefined') return;
 
-  /* ── Vector helpers ── */
+  /* ���─ Vector helpers ── */
   class Vector2D {
     constructor(x, y) { this.x = x; this.y = y; }
     static random(min, max) { return min + Math.random() * (max - min); }
