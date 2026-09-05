@@ -1,32 +1,42 @@
 [
   {
     "id": "placeholder-1",
-    "name": "Marcus T.",
-    "company": "Startup Founder",
+    "name": "Mrs. Candice",
+    "company": "Founder & Owner, UNCMS, LLC",
     "rating": "5 Stars",
-    "review": "Working with NC Developer was seamless from start to finish. They took our idea and turned it into a polished, professional app that exceeded every expectation.",
+    "review": "Working with NC Developer was seamless from start to finish. They took our idea and turned it into a polished, professional website that exceeded every expectation.",
     "date": "2026-03-15",
-    "initial": "M",
+    "initial": "C",
     "color": "gold"
   },
   {
     "id": "placeholder-2",
-    "name": "Priya S.",
-    "company": "Product Manager",
+    "name": "Marcus T.",
+    "company": "Startup Founder",
     "rating": "5 Stars",
-    "review": "Professional, creative, and incredibly detail-oriented. The team genuinely cared about getting our product right. I can't recommend them enough.",
+    "review": "Neeka created an absolutely beautiful website for my nursing care management company — and my client traffic has grown noticeably since launch. The logo redesign is perfect, and I still can't believe it only took a few days. Fair pricing, stunning results, and a seamless experience. If I could give more than five stars, I would — ten stars! I recommend NC Developer to everyone.",
     "date": "2026-03-20",
-    "initial": "P",
+    "initial": "M",
     "color": "teal"
   },
   {
     "id": "placeholder-3",
+    "name": "Priya S.",
+    "company": "Product Manager",
+    "rating": "5 Stars",
+    "review": "Professional, creative, and incredibly detail-oriented. The team genuinely cared about getting the digital design for our product right. I can't recommend them enough.",
+    "date": "2026-03-28",
+    "initial": "P",
+    "color": "lime"
+  },
+  {
+    "id": "placeholder-4",
     "name": "James R.",
     "company": "Business Owner",
     "rating": "5 Stars",
     "review": "From concept to launch faster than I imagined. NC Developer brought both technical excellence and creative vision to every stage of the project.",
-    "date": "2026-03-28",
+    "date": "2026-04-02",
     "initial": "J",
-    "color": "lime"
+    "color": "gold"
   }
 ]
